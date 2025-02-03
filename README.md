@@ -6,10 +6,10 @@
 
 ## 🚀 Quick Links
 
-- **Portfolio Website:** [Link to Your Portfolio]
-- **GitHub:** [Your GitHub Profile]
-- **LinkedIn:** [Your LinkedIn Profile]
-- **Email:** [Your Email Address]
+- **Portfolio Website:** to be determined
+- **GitHub:** https://github.com/godxrs
+- **LinkedIn:** www.linkedin.com/in/baldemar-guajardo-454132228
+- **Email:** Baldemarguajardo20@gmail.com
 
 ---
 
