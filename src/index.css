@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --transition-duration: 0.3s;
+}
+
+body {
+  @apply bg-primary text-accent-foreground;
+  font-family: 'Inter', sans-serif;
+}
+
+.section-heading {
+  @apply text-3xl md:text-4xl font-bold mb-6 text-accent-foreground relative;
+}
+
+.section-heading::after {
+  content: '';
+  @apply absolute -bottom-2 left-0 w-20 h-1 bg-primary-foreground;
+}
+
+
