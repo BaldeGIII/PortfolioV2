@@ -37,15 +37,18 @@ const About = () => {
           <h2 className="text-3xl font-semibold mb-6 text-center">Technical Skills</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {skills.map((category, index) => (
-              <div key={index} className="bg-gray-700 p-4 rounded-lg shadow-md">
-                <h3 className="text-xl font-semibold mb-4 text-center text-primary border-b border-primary pb-2">
+              <div 
+                key={index} 
+                className="bg-[rgb(100,255,218)]/10 p-4 rounded-lg shadow-md border border-[rgb(100,255,218)]/20"
+              >
+                <h3 className="text-xl font-semibold mb-4 text-center text-[rgb(100,255,218)] border-b border-[rgb(100,255,218)]/30 pb-2">
                   {category.title}
                 </h3>
                 <div className="grid grid-cols-2 gap-2">
                   {category.skills.map((skill, index) => (
                     <div
                       key={index}
-                      className="bg-gray-800 p-2 rounded text-center text-sm border border-primary"
+                      className="bg-gray-800/50 p-2 rounded text-center text-sm border border-[rgb(100,255,218)]/20 text-[rgb(100,255,218)]"
                     >
                       {skill}
                     </div>

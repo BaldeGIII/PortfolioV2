@@ -47,8 +47,8 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
         <div className="flex flex-wrap gap-2">
           {project.technologies.map((tech, index) => (
             <span key={index} 
-                  className="bg-primary px-3 py-1 rounded-full text-sm
-                           text-white font-medium">
+                  className="bg-[rgb(100,255,218)]/10 px-3 py-1 rounded-full text-sm
+                           text-[rgb(100,255,218)] font-medium border border-[rgb(100,255,218)]/20">
               {tech}
             </span>
           ))}
@@ -61,7 +61,7 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
           {shouldTruncate && (
             <button
               onClick={() => setIsExpanded(!isExpanded)}
-              className="text-primary hover:text-white ml-2 font-medium"
+              className="text-[rgb(100,255,218)] hover:text-[rgb(100,255,218)]/80 ml-2 font-medium"
             >
               {isExpanded ? 'Show Less' : 'Show More'}
             </button>
@@ -71,8 +71,8 @@ const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
 
       <a
         href={project.link}
-        className="inline-block bg-primary text-white px-6 py-3 rounded-lg 
-                 hover:bg-primary/80 transition-colors text-center mt-auto
+        className="inline-block bg-[rgb(100,255,218)] text-white px-6 py-3 rounded-lg 
+                 hover:bg-[rgb(100,255,218)]/80 transition-colors text-center mt-auto
                  font-semibold"
         target="_blank"
         rel="noopener noreferrer"
