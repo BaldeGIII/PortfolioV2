@@ -89,10 +89,9 @@ const Contact = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium 
-                     bg-[rgb(100,255,218)]/10 text-[rgb(100,255,218)] border-[rgb(100,255,218)]/20
-                     hover:bg-[rgb(100,255,218)]/20 focus:outline-none focus:ring-2 
-                     focus:ring-[rgb(100,255,218)]/50 disabled:opacity-50 transition-colors"
+            className="w-full py-2 px-4 border border-[rgb(100,255,218)]/20 rounded-md shadow-sm text-sm font-medium 
+                      bg-[rgb(100,255,218)]/10 text-[rgb(100,255,218)] hover:bg-[rgb(100,255,218)]/20 focus:outline-none focus:ring-2 
+                      focus:ring-[rgb(100,255,218)]/50 disabled:opacity-50 transition-colors"
           >
             {isSubmitting ? "Sending..." : "Send Message"}
           </button>
