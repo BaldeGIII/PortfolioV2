@@ -6,7 +6,7 @@ const projects = [
     description:
       "An app called Aqua Mundi that informs the user what county in Texas a body of water is located and also informs a user on the endangered species know to inhabit that body of water. This can include detailed information about various species, their conservation status, and the environmental factors affecting their habitat.",
     technologies: ["Python", "JavaScript", "Android Studio"],
-    link: "https://github.com/godxrs/Aqua-Mundi",
+    link: "https://github.com/BaldeGIII/Aqua-Mundi",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
   },
   {
@@ -14,9 +14,17 @@ const projects = [
     description:
       "A Python-based CHIP-8 emulator implementing a complete set of opcodes to emulate the original system architecture. Features include instruction decoding, memory management, and graphics rendering.",
     technologies: ["Python", "Assembly", "Binary", "Tkinter", "Pygame"],
-    link: "https://github.com/godxrs/Chip-8Emulator",
+    link: "https://github.com/BaldeGIII/Chip-8Emulator",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
   },
+  {
+    title: "BaldeBoy Emulator",
+    description:
+      "BaldeBoyEmulator is an in-progress Game Boy Emulator, built using React, TypeScript, and Vite for a modern, high-performance web experience. It aims to provide accurate emulation with a clean, customizable UI powered by TailwindCSS. The project focuses on efficient frame execution, ROM loading, and audio processing, making it an ideal emulator for retro gaming enthusiasts.",
+    technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "JavaScript", "CSS", "HTML"],
+    link: "https://github.com/BaldeGIII/BaldeBoyEmulator",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
+  }
 ]
 
 const ProjectCard = ({ project }: { project: typeof projects[0] }) => {
