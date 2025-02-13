@@ -7,7 +7,7 @@
 ## 🚀 Quick Links
 
 - **Portfolio Website:** to be determined
-- **GitHub:** https://github.com/godxrs
+- **GitHub:** https://github.com/BaldeGIII
 - **LinkedIn:** www.linkedin.com/in/baldemar-guajardo-454132228
 - **Email:** Baldemarguajardo20@gmail.com
 
