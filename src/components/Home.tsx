@@ -1,22 +1,27 @@
-import { TypeAnimation } from "react-type-animation"
-import githubIcon from "../assets/github-mark-white.png"
-import linkedinIcon from "../assets/linkedin-app-white-icon.webp"
-import profilePic from "../assets/67811850.png"  // Fix typo in variable name
+import { TypeAnimation } from "react-type-animation";
+import githubIcon from "../assets/github-mark-white.png";
+import linkedinIcon from "../assets/linkedin-app-white-icon.webp";
+import profilePic from "../assets/67811850.png"; // Fix typo in variable name
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center p-5 bg-primary" id="home">
+    <div
+      className="min-h-screen flex items-center justify-center p-5 bg-primary"
+      id="home"
+    >
       <div className="max-w-4xl mx-auto px-4 py-16 animate-fade-in">
         <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
           <div className="w-48 h-48 rounded-full overflow-hidden">
-            <img 
-              src={profilePic} 
-              alt="Profile" 
+            <img
+              src={profilePic}
+              alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
           <div>
-            <div className="text-primary-foreground font-mono mb-4">Hi, my name is</div>
+            <div className="text-primary-foreground font-mono mb-4">
+              Hi, my name is
+            </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-4 text-accent-foreground">
               Baldemar Guajardo
             </h1>
@@ -41,7 +46,7 @@ const Home = () => {
             </div>
             <div className="flex gap-6 mt-8">
               <a
-                href="https://github.com/godxrs"
+                href="https://github.com/BaldeGIII"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-accent-foreground hover:text-primary-foreground transition-colors duration-300"
@@ -61,8 +66,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
-
+export default Home;
