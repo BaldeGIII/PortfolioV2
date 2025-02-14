@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
+import Chipy8 from "../assets/Chip8-Emulator.png";
+import AquaMundi from "../assets/AquaMundi.png";
+import The70 from "../assets/70GBEmu.png"
 
 const projects = [
-  {
-    title: "Aqua-Mundi",
-    description:
-      "An app called Aqua Mundi that informs the user what county in Texas a body of water is located and also informs a user on the endangered species know to inhabit that body of water. This can include detailed information about various species, their conservation status, and the environmental factors affecting their habitat.",
-    technologies: ["Python", "JavaScript", "Android Studio"],
-    link: "https://github.com/BaldeGIII/Aqua-Mundi",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
-  },
   {
     title: "Chip-8 Emulator",
     description:
       "A Python-based CHIP-8 emulator implementing a complete set of opcodes to emulate the original system architecture. Features include instruction decoding, memory management, and graphics rendering.",
     technologies: ["Python", "Assembly", "Binary", "Tkinter", "Pygame"],
     link: "https://github.com/BaldeGIII/Chip-8Emulator",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
+    image: Chipy8,
+    completion: 100,
+  },
+  {
+    title: "Aqua-Mundi",
+    description:
+      "An app called Aqua Mundi that informs the user what county in Texas a body of water is located and also informs a user on the endangered species know to inhabit that body of water. This can include detailed information about various species, their conservation status, and the environmental factors affecting their habitat.",
+    technologies: ["Python", "JavaScript", "Android Studio"],
+    link: "https://github.com/BaldeGIII/Aqua-Mundi",
+    image: AquaMundi,
+    completion: 100,
   },
   {
     title: "BaldeBoy Emulator",
@@ -34,10 +37,35 @@ const projects = [
       "HTML",
     ],
     link: "https://github.com/BaldeGIII/BaldeBoyEmulator",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/react-HzzvMEg21Sf21Kgn31RWCcPzcM0Y5o.svg",
+    image: The70,
+    completion: 70,
   },
 ];
+
+const ProgressBar = ({ completion }: { completion: number }) => {
+  return (
+    <div className="w-full mt-4 mb-6">
+      <div className="flex justify-between mb-1">
+        <span className="text-sm font-medium text-[rgb(100,255,218)]">
+          {completion === 100 ? "Completed" : "In Progress"}
+        </span>
+        <span className="text-sm font-medium text-[rgb(100,255,218)]">
+          {completion}%
+        </span>
+      </div>
+      <div className="w-full bg-gray-600 rounded-full h-2.5">
+        <div
+          className={`h-2.5 rounded-full ${
+            completion === 100
+              ? "bg-[rgb(100,255,218)]"
+              : "bg-[rgb(100,255,218)]/60"
+          }`}
+          style={{ width: `${completion}%` }}
+        ></div>
+      </div>
+    </div>
+  );
+};
 
 const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -70,6 +98,9 @@ const ProjectCard = ({ project }: { project: (typeof projects)[0] }) => {
               )}
             </p>
           </div>
+
+          <ProgressBar completion={project.completion} />
+
           <div className="flex flex-wrap gap-2">
             {project.technologies.map((tech, index) => (
               <span

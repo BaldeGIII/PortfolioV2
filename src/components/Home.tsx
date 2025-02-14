@@ -1,7 +1,7 @@
 import { TypeAnimation } from "react-type-animation";
 import githubIcon from "../assets/github-mark-white.png";
 import linkedinIcon from "../assets/linkedin-app-white-icon.webp";
-import profilePic from "../assets/67811850.png"; // Fix typo in variable name
+import profilePic from "../assets/67811850.png"; 
 
 const Home = () => {
   return (
