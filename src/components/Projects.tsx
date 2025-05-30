@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import Chipy8 from "../assets/Chip8-Emulator.png";
 import AquaMundi from "../assets/AquaMundi.png";
-import The70 from "../assets/70GBEmu.png"
+import The70 from "../assets/70GBEmu.png";
 
 const projects = [
   {
@@ -39,6 +39,23 @@ const projects = [
     link: "https://github.com/BaldeGIII/BaldeBoyEmulator",
     image: The70,
     completion: 70,
+  },
+  {
+    title: "BALVIS",
+    description:
+      "BALVIS integrates with the ChatGPT API, making it easier for users to talk to ChatGPT, set reminders, search youtube videos, and much more. It's built with React, TypeScript, Vite, TailwindCSS, JavaScript, CSS, and HTML.",
+    technologies: [
+      "React",
+      "TypeScript",
+      "Vite",
+      "TailwindCSS",
+      "JavaScript",
+      "CSS",
+      "HTML",
+    ],
+    link: "https://github.com/BaldeGIII/BALVIS",
+    image: "pl",
+    completion: 75,
   },
 ];
 
@@ -144,8 +161,6 @@ const Projects = () => {
       id="projects"
     >
       <div className="max-w-6xl mx-auto space-y-12">
-        {" "}
-        {/* added space-y-12 */}
         <h2 className="text-4xl font-bold text-center">Projects</h2>
         <div className="grid grid-cols-1 gap-12">
           {projects.map((project, index) => (
