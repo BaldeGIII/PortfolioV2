@@ -138,40 +138,39 @@ function App() {
 
       {/* Mobile menu */}
       <nav
-        className={`fixed inset-y-0 right-0 w-64 bg-secondary transform transition-transform duration-300 ease-in-out z-40 ${
-          // z-40 to be under the header if needed, or z-50/z-60 if over.
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-16 left-0 right-0 bg-primary/85 backdrop-blur-sm transform transition-transform duration-300 ease-in-out z-40 ${
+          menuOpen ? "translate-y-0" : "-translate-y-full"
+        } ${menuOpen ? "block" : "hidden"}`}
         aria-label="Mobile navigation" // Added aria-label
       >
-        <div className="py-2">
+        <div className="py-2 flex flex-col items-center">
           <a
             href="#home"
-            className="block px-4 py-2 text-primary hover:bg-gray-600 transition-colors"
+            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
           >
             Home
           </a>
           <a
             href="#about"
-            className="block px-4 py-2 text-primary hover:bg-gray-600 transition-colors"
+            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
           >
             About Me
           </a>
           <a
             href="#experience"
-            className="block px-4 py-2 text-primary hover:bg-gray-600 transition-colors"
+            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
           >
             Experience
           </a>
           <a
             href="#projects"
-            className="block px-4 py-2 text-primary hover:bg-gray-600 transition-colors"
+            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="block px-4 py-2 text-primary hover:bg-gray-600 transition-colors"
+            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
           >
             Contact
           </a>
