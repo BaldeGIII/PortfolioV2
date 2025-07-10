@@ -42,10 +42,10 @@ const About = () => {
   ];
   return (
     <div
-      className="min-h-screen flex items-center justify-center bg-secondary text-white p-8"
+      className="w-full p-8 pt-24 pb-24 min-h-screen bg-secondary text-white flex flex-col items-center"
       id="about"
     >
-      <div className="max-w-4xl">
+      <div className="w-full max-w-6xl">
         <h1 className="text-4xl font-bold mb-6 text-center">About Me</h1>
         <p className="text-lg mb-8 text-center">
           Hello, I'm Baldemar Guajardo. I am passionate about AI, Machine
