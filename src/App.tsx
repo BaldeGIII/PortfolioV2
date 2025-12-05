@@ -87,119 +87,128 @@ function App() {
   }, [menuOpen]); // Add menuOpen to dependency array
 
   return (
-    <div className="bg-primary text-accent-foreground">
-      <header className="fixed top-0 left-0 w-full bg-primary/90 backdrop-blur-sm z-50 border-b border-accent/10">
-        <div className="container mx-auto flex justify-between items-center p-4">
-          <div className="font-mono text-primary-foreground">BG</div>
-          <button
-            className="menu-button md:hidden w-10 h-10 flex items-center justify-center text-accent-foreground"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu" // Added aria-label for accessibility
-            aria-expanded={menuOpen} // Indicate if menu is open or closed
-          >
-            &#9776;
-          </button>
-          <nav className="hidden md:block">
-            <div className="flex gap-8">
-              <a
-                href="#home"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors"
-              >
-                Home
-              </a>
-              <a
-                href="#about"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors"
-              >
-                About Me
-              </a>
-              <a
-                href="#experience"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors"
-              >
-                Experience
-              </a>
-              <a
-                href="#projects"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors"
-              >
-                Projects
-              </a>
-              <a
-                href="#contact"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors"
-              >
-                Contact
-              </a>
-            </div>
-          </nav>
-        </div>
+    <div className="bg-slate-950 text-slate-300 font-sans">
+      <header className="fixed top-4 left-4 md:top-10 md:left-12 z-50">
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="menu-button text-base md:text-lg font-bold text-slate-100 hover:text-blue-400 transition-colors focus:outline-none"
+        >
+          BG<span className="text-blue-500">III</span>
+        </button>
       </header>
 
-      {/* Mobile menu */}
+      {/* Desktop menu */}
       <nav
-        className={`fixed top-16 left-0 right-0 bg-primary/85 backdrop-blur-sm transform transition-transform duration-300 ease-in-out z-40 ${
-          menuOpen ? "translate-y-0" : "-translate-y-full"
-        } ${menuOpen ? "block" : "hidden"}`}
-        aria-label="Mobile navigation" // Added aria-label
+        className={`hidden md:block fixed top-24 left-12 bg-slate-900/95 backdrop-blur-sm rounded-lg border border-slate-800 shadow-xl transform transition-all duration-300 ease-in-out z-40 ${
+          menuOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        }`}
+        aria-label="Desktop navigation"
       >
-        <div className="py-2 flex flex-col items-center">
+        <div className="py-2 flex flex-col min-w-[140px]">
           <a
             href="#home"
-            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
           >
             Home
           </a>
           <a
             href="#about"
-            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
           >
-            About Me
+            About
           </a>
           <a
             href="#experience"
-            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
           >
             Experience
           </a>
           <a
             href="#projects"
-            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="block px-4 py-2 text-primary-foreground hover:bg-gray-600 transition-colors rounded-md"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
           >
             Contact
           </a>
         </div>
       </nav>
 
-      <main className="pt-16">
-        {" "}
-        {/* Added pt-16 to offset fixed header */}
-        <div id="home" className="content">
-          {" "}
-          {/* Consider min-h-screen for Home if it's a full-page section */}
+      {/* Mobile menu */}
+      <nav
+        className={`fixed top-16 right-4 bg-slate-900/95 backdrop-blur-sm rounded-lg border border-slate-800 shadow-xl transform transition-all duration-300 ease-in-out z-40 ${
+          menuOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
+        } md:hidden`}
+        aria-label="Mobile navigation"
+      >
+        <div className="py-2 flex flex-col min-w-[140px]">
+          <a
+            href="#home"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+          >
+            Home
+          </a>
+          <a
+            href="#about"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+          >
+            About
+          </a>
+          <a
+            href="#experience"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+          >
+            Experience
+          </a>
+          <a
+            href="#projects"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+          >
+            Projects
+          </a>
+          <a
+            href="#contact"
+            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+          >
+            Contact
+          </a>
+        </div>
+      </nav>
+
+      <main className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16">
+        <div id="home" className="pt-32">
           <Home />
         </div>
-        <div id="about" className="content min-h-screen">
+        <div id="about" className="py-16 md:py-24">
           <About />
         </div>
-        <div id="experience" className="content min-h-screen">
+        <div id="experience" className="py-16 md:py-24">
           <Experience />
         </div>
-        <div id="projects" className="content">
-          {" "}
-          {/* Consider min-h-screen for Projects if needed */}
+        <div id="projects" className="py-16 md:py-24">
           <Projects />
         </div>
-        <div id="contact" className="content min-h-screen">
+        <div id="contact" className="py-16 md:py-24 pb-24">
           <Contact />
         </div>
       </main>
+
+      <footer className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 pt-12 pb-12 border-t border-slate-900 text-sm text-slate-600">
+        <div className="flex justify-between items-center">
+          <p>© 2025 Baldemar Guajardo</p>
+          <p className="flex items-center gap-1">
+            Built with <span className="text-blue-500">BALVIS</span>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

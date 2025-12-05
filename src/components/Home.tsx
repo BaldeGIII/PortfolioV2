@@ -1,70 +1,72 @@
 import { TypeAnimation } from "react-type-animation";
-import githubIcon from "../assets/github-mark-white.png";
-import linkedinIcon from "../assets/linkedin-app-white-icon.webp";
-import profilePic from "../assets/67811850.png"; 
+import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import profilePic from "../assets/67811850.png";
 
 const Home = () => {
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-5 bg-primary"
-      id="home"
-    >
-      <div className="max-w-4xl mx-auto px-4 py-16 animate-fade-in">
-        <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
-          <div className="w-48 h-48 rounded-full overflow-hidden">
-            <img
-              src={profilePic}
-              alt="Profile"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <div className="text-primary-foreground font-mono mb-4">
-              Hi, my name is
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-accent-foreground">
-              Baldemar Guajardo
-            </h1>
-            <div className="text-2xl md:text-4xl text-secondary-foreground mb-8">
-              <TypeAnimation
-                preRenderFirstString={true}
-                sequence={[
-                  "Web Developer",
-                  1000,
-                  "FullStack Developer",
-                  1000,
-                  "Software Engineer",
-                  1000,
-                  "AI Engineer",
-                  1000,
-                  "Machine Learning Engineer",
-                  1000,
-                ]}
-                speed={50}
-                repeat={Number.POSITIVE_INFINITY}
-              />
-            </div>
-            <div className="flex gap-6 mt-8">
-              <a
-                href="https://github.com/BaldeGIII"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors duration-300"
-              >
-                <img src={githubIcon} alt="Github" className="w-8 h-8" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/baldemar-guajardo-454132228/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-foreground hover:text-primary-foreground transition-colors duration-300"
-              >
-                <img src={linkedinIcon} alt="LinkedIn" className="w-8 h-8" />
-              </a>
-            </div>
-          </div>
+    <div className="min-h-screen flex items-center justify-center pb-24 px-4">
+      <header className="mb-24 text-center w-full">
+        <div className="mb-8 flex justify-center">
+          <img
+            src={profilePic}
+            alt="Baldemar Guajardo"
+            className="w-32 h-32 md:w-48 md:h-48 rounded-full object-cover border-2 border-slate-800 hover:border-blue-500 transition-colors"
+          />
         </div>
-      </div>
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-bold tracking-tight mb-6 text-slate-100 px-4">
+          Baldemar Guajardo
+        </h1>
+
+        <h2 className="text-lg sm:text-xl md:text-3xl font-light mb-10 max-w-3xl mx-auto text-slate-400 px-4">
+          <TypeAnimation
+            preRenderFirstString={true}
+            sequence={[
+              "Computer Scientist & Electical Engineer",
+              3000,
+              "Full Stack Developer",
+              2000,
+              "AI Engineer",
+              2000,
+              "Machine Learning / Deep Learning Engineer",
+              2000,
+            ]}
+            speed={50}
+            repeat={Number.POSITIVE_INFINITY}
+          />
+        </h2>
+
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 text-sm sm:text-base font-medium text-slate-500 px-4">
+          <a
+            href="mailto:Baldemarguajardo20@gmail.com"
+            className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+          >
+            <Mail size={16} className="md:w-[18px] md:h-[18px]" />
+            <span>Email</span>
+          </a>
+          <a
+            href="https://github.com/BaldeGIII"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+          >
+            <Github size={16} className="md:w-[18px] md:h-[18px]" />
+            <span>GitHub</span>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/baldemar-guajardo-454132228/"
+            target="_blank"
+            rel="noreferrer"
+            className="flex items-center gap-2 hover:text-blue-400 transition-colors"
+          >
+            <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
+            <span>LinkedIn</span>
+          </a>
+          <span className="flex items-center gap-2">
+            <MapPin size={16} className="md:w-[18px] md:h-[18px]" />
+            <span>Penitas, TX</span>
+          </span>
+        </div>
+      </header>
     </div>
   );
 };

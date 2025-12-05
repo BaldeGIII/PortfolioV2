@@ -2,6 +2,9 @@ import React, { useState } from "react"; // Import React for Fragment
 // Import your logos - adjust paths as necessary
 import mvecLogo from "../assets/MVECLogo.png";
 import utrgvLogo from "../assets/UTRGVLogo.png";
+import vsrLogo from "../assets/vsrLogo.jpeg";
+import team10Poster from "../assets/Team 10 Poster.pdf";
+import trackFieldProject from "../assets/Group1_Track_and_Field_Data_Project.pdf";
 
 interface ExperienceItem {
   id: string;
@@ -17,6 +20,19 @@ interface ExperienceItem {
 
 const experiencesData: ExperienceItem[] = [
   {
+    id: "vsr",
+    image: vsrLogo,
+    title: "Full Stack Developer Intern",
+    company: "Valley Steel Recycling",
+    duration: "July 2025 – September 2025",
+    location: "McAllen, TX (Hybrid)",
+    responsibilities: [
+      "Developed and deployed a full-stack, cross-platform vehicle inspection app using React Native and Node.js, hosted on Render to digitize the entire reporting and approval workflow.",
+      "Implemented a secure, role-based user authentication system with Clerk, enabling workers to submit detailed inspection forms with image uploads managed by Cloudinary.",
+      "Architected a scalable backend API utilizing a serverless Neon (Postgres) database for data integrity and Upstash (Redis) for high-performance caching and real-time updates.",
+    ],
+  },
+  {
     id: "utrgv",
     image: utrgvLogo,
     title: "Deep Learning Researcher",
@@ -29,7 +45,7 @@ const experiencesData: ExperienceItem[] = [
       "Modified base reinforcement learning architectures with language instruction encoding modules using GloVe word embeddings, enabling agents to interpret natural language commands for more efficient task learning.",
       "Created visualization tools to demonstrate performance improvements, showing that language-guided models achieved higher peak performance and more consistent high-reward behavior in complex control tasks.",
     ],
-    documentUrl: "src/assets/Team 10 Poster.pdf",
+    documentUrl: team10Poster,
   },
   {
     id: "utrgv-2",
@@ -44,7 +60,7 @@ const experiencesData: ExperienceItem[] = [
       "Created comprehensive event correlation matrices showing strong relationships within event categories (0.71-0.81) correlation), providing coaches with data-driven insights for strategic athlete development.",
       "Presented findings that revealed relays and jumps as the highest point-generating events, enabling more efficient resource allocation and training focus for maximizing team scoring potential.",
     ],
-    documentUrl: "src/assets/Group1_Track_and_Field_Data_Project.pdf",
+    documentUrl: trackFieldProject,
   },
   {
     id: "mvec",
@@ -69,99 +85,72 @@ const experiencesData: ExperienceItem[] = [
 const Experience = () => {
   const [activeDocument, setActiveDocument] = useState<string | null>(null);
 
-  return (
-    <div
-      className="w-full p-8 pt-24 pb-24 min-h-screen bg-primary flex flex-col items-center text-white overflow-x-hidden relative" // Using your specified classes, removed justify-center for natural top alignment
-      id="experience"
-    >
-      {/* Wrapper to control max-width of the content area */}
-      <div className="w-full max-w-6xl space-y-12">
-        {/* Section Title */}
-        <h2 className="text-4xl font-bold text-center">
-          Experience
-        </h2>
-        {experiencesData.map((exp, index) => (
-          <React.Fragment key={exp.id}>
-            {index > 0 && (
-              // This HR is the "border" that appears between experience items.
-              // The title "Experience" is rendered before this map, thus above this border.
-              <hr className="w-full border-accent/20" />
-            )}
-            {/* Card container for each experience item */}
-            <div className="w-full bg-secondary/20 p-6 rounded-lg shadow-xl font-poppins">
-              {" "}
-              {/* Card takes full width of max-w-5xl parent */}
-              <div className="flex flex-col sm:flex-row items-start gap-6">
-                {/* Logo */}
-                <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 bg-gray-700/50 p-2 rounded-md flex items-center justify-center">
-                  <img
-                    src={exp.image}
-                    alt={`${exp.company} logo`}
-                    className="object-contain w-full h-full rounded-sm"
-                  />
-                </div>
-
-                {/* Details: Title, Company, Duration, Location, Program Name */}
-                <div className="flex-grow">
-                  <h2 className="text-xl sm:text-2xl font-bold text-accent-foreground">
-                    {exp.title}
-                  </h2>
-                  <p className="text-md sm:text-lg text-gray-300">
-                    {exp.company}
-                  </p>
-                  <p className="text-sm text-gray-400 mt-1">
-                    {exp.duration} | 📍 {exp.location}
-                  </p>
-                  {exp.programName && (
-                    <p className="text-sm text-gray-400">{exp.programName}</p>
-                  )}
-                </div>
-              </div>
-              {/* Responsibilities */}
-              <ul className="list-disc pl-5 mt-4 space-y-2 md:space-y-4">
-                {exp.responsibilities.map((responsibility, i) => (
-                  <li
-                    key={i}
-                    className="text-sm md:text-base leading-relaxed text-gray-300"
-                  >
-                    {responsibility}
-                  </li>
-                ))}
-              </ul>
-              {/* Document Link Button */}
-              {exp.documentUrl && (
-                <div className="mt-6">
-                  <button
-                    onClick={() =>
-                      setActiveDocument(
-                        activeDocument === exp.documentUrl
-                          ? null
-                          : exp.documentUrl ?? null
-                      )
-                    }
-                    className="px-4 py-2 bg-accent text-primary-foreground rounded hover:bg-accent/90 transition-colors self-start text-sm font-semibold"
-                  >
-                    {activeDocument === exp.documentUrl ? "Hide" : "View"}{" "}
-                    Details
-                  </button>
-                </div>
-              )}
-            </div>
-          </React.Fragment>
-        ))}
+  const ExperienceItem = ({
+    exp,
+    index,
+  }: {
+    exp: ExperienceItem;
+    index: number;
+  }) => (
+    <div className="group mb-12 md:grid md:grid-cols-4 md:gap-6">
+      <header className="md:col-span-1 mb-2 md:mb-0">
+        <span className="text-xs font-mono text-slate-500 mt-1.5 uppercase tracking-wide group-hover:text-blue-400 transition-colors">
+          {exp.duration}
+        </span>
+      </header>
+      <div className="md:col-span-3">
+        <h3 className="text-lg font-medium text-slate-100 group-hover:text-blue-400 transition-colors">
+          {exp.title} <span className="text-slate-600">·</span> {exp.company}
+        </h3>
+        <p className="text-sm text-slate-500 mt-1">📍 {exp.location}</p>
+        <ul className="mt-4 space-y-2">
+          {exp.responsibilities.map((responsibility, i) => (
+            <li
+              key={i}
+              className="text-slate-400 text-base leading-relaxed flex items-start"
+            >
+              <span className="mr-3 mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+              <span>{responsibility}</span>
+            </li>
+          ))}
+        </ul>
+        {exp.documentUrl && (
+          <button
+            onClick={() =>
+              setActiveDocument(
+                activeDocument === exp.documentUrl
+                  ? null
+                  : exp.documentUrl ?? null
+              )
+            }
+            className="mt-4 text-sm text-blue-400 hover:text-blue-300 transition-colors underline decoration-dotted"
+          >
+            {activeDocument === exp.documentUrl ? "Hide" : "View"} Details
+          </button>
+        )}
       </div>
+    </div>
+  );
 
-      {/* Modal or section to display the document */}
+  return (
+    <section id="experience" className="py-24 md:py-32 -mt-16 pt-32">
+      <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4">
+        Experience
+      </h2>
+      {experiencesData.map((exp, index) => (
+        <ExperienceItem key={exp.id} exp={exp} index={index} />
+      ))}
+
       {activeDocument && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[60] p-4">
-          <div className="bg-white p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 bg-black/75 flex items-center justify-center z-[60] p-4">
+          <div className="bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-800">
             <div className="flex justify-between items-center mb-2">
-              <h4 className="text-lg font-semibold text-gray-800">
+              <h4 className="text-lg font-semibold text-slate-100">
                 Document Viewer
               </h4>
               <button
                 onClick={() => setActiveDocument(null)}
-                className="text-gray-800 hover:text-red-500 text-2xl"
+                className="text-slate-400 hover:text-red-400 text-2xl transition-colors"
               >
                 &times;
               </button>
@@ -169,12 +158,12 @@ const Experience = () => {
             <iframe
               src={activeDocument}
               title="Experience Document"
-              className="w-full h-full border-none"
+              className="w-full h-full border-none rounded"
             />
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 
