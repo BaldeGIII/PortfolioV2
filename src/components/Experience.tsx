@@ -85,13 +85,7 @@ const experiencesData: ExperienceItem[] = [
 const Experience = () => {
   const [activeDocument, setActiveDocument] = useState<string | null>(null);
 
-  const ExperienceItem = ({
-    exp,
-    index,
-  }: {
-    exp: ExperienceItem;
-    index: number;
-  }) => (
+  const ExperienceItem = ({ exp }: { exp: ExperienceItem }) => (
     <div className="group mb-12 md:grid md:grid-cols-4 md:gap-6">
       <header className="md:col-span-1 mb-2 md:mb-0">
         <span className="text-xs font-mono text-slate-500 mt-1.5 uppercase tracking-wide group-hover:text-blue-400 transition-colors">
