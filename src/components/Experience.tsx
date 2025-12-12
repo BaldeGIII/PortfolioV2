@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import React for Fragment
+import { useState } from "react";
 // Import your logos - adjust paths as necessary
 import mvecLogo from "../assets/MVECLogo.png";
 import utrgvLogo from "../assets/UTRGVLogo.png";
@@ -137,8 +137,8 @@ const Experience = () => {
       <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4">
         Experience
       </h2>
-      {experiencesData.map((exp, index) => (
-        <ExperienceItem key={exp.id} exp={exp} index={index} />
+      {experiencesData.map((exp) => (
+        <ExperienceItem key={exp.id} exp={exp} />
       ))}
 
       {activeDocument && (
