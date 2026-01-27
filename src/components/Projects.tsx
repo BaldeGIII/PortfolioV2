@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { FaGithub } from "react-icons/fa";
 import Chipy8 from "../assets/Chip8-Emulator.png";
 import AquaMundi from "../assets/AquaMundi.png";
@@ -5,6 +6,16 @@ import The70 from "../assets/70GBEmu.png";
 import Balvis from "../assets/balvis.png";
 
 const projects = [
+  {
+    title: "Multi-Agent Autonomous Racing (Senior Project)",
+    description:
+      "Engineered a competitive multi-agent racing environment using MetaDrive, utilizing Proximal Policy Optimization (PPO) to train agents from scratch for optimal trajectory and speed. Integrated Weights & Biases (WandB) to monitor training sessions and designed a custom reward function with 'Ghost Mode' for stable parallel training.",
+    technologies: ["Python", "MetaDrive", "PPO", "WandB"],
+    link: "https://github.com/Joshua-Handy/ApexAI",
+    image: "https://img.youtube.com/vi/iqPV1rrlNxo/maxresdefault.jpg",
+    videoUrl: "https://youtu.be/iqPV1rrlNxo",
+    completion: 100,
+  },
   {
     title: "Chip-8 Emulator",
     description:
@@ -43,15 +54,37 @@ const projects = [
   },
 ];
 
-const ProjectItem = ({ project }: { project: (typeof projects)[0] }) => (
+const ProjectItem = ({
+  project,
+  onImageClick
+}: {
+  project: (typeof projects)[0];
+  onImageClick: (image: string, title: string, videoUrl?: string) => void;
+}) => (
   <div className="group py-8 border-t border-slate-900 first:border-0 first:pt-0">
     <div className="grid md:grid-cols-[200px,1fr] gap-6 mb-4">
-      <div className="relative overflow-hidden rounded border border-slate-800 group-hover:border-blue-500 transition-colors">
+      <div
+        className="relative overflow-hidden rounded border border-slate-800 group-hover:border-blue-500 transition-colors cursor-pointer"
+        onClick={() => onImageClick(project.image, project.title, project.videoUrl)}
+      >
         <img
           src={project.image}
           alt={project.title}
           className="w-full h-full object-cover aspect-video"
         />
+        {project.videoUrl && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors">
+            <div className="w-12 h-12 rounded-full bg-blue-500/90 flex items-center justify-center">
+              <svg
+                className="w-6 h-6 text-white ml-1"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+        )}
       </div>
       <div>
         <div className="flex flex-col md:flex-row md:items-baseline md:justify-between mb-4">
@@ -92,8 +125,19 @@ const ProjectItem = ({ project }: { project: (typeof projects)[0] }) => (
 );
 
 const Projects = () => {
+  const [activeImage, setActiveImage] = useState<{ src: string; title: string; videoUrl?: string } | null>(null);
   const completedProjects = projects.filter((p) => p.completion === 100);
   const inProgressProjects = projects.filter((p) => p.completion < 100);
+
+  const handleImageClick = (image: string, title: string, videoUrl?: string) => {
+    setActiveImage({ src: image, title, videoUrl });
+  };
+
+  // Convert YouTube URL to embed format
+  const getYouTubeEmbedUrl = (url: string) => {
+    const videoId = url.split('youtu.be/')[1]?.split('?')[0] || url.split('v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/embed/${videoId}`;
+  };
 
   return (
     <section id="projects" className="py-24 md:py-32 -mt-16 pt-32">
@@ -102,7 +146,7 @@ const Projects = () => {
       </h2>
 
       {completedProjects.map((project, index) => (
-        <ProjectItem key={index} project={project} />
+        <ProjectItem key={index} project={project} onImageClick={handleImageClick} />
       ))}
 
       {inProgressProjects.length > 0 && (
@@ -111,9 +155,53 @@ const Projects = () => {
             In Progress
           </h3>
           {inProgressProjects.map((project, index) => (
-            <ProjectItem key={index} project={project} />
+            <ProjectItem key={index} project={project} onImageClick={handleImageClick} />
           ))}
         </>
+      )}
+
+      {activeImage && (
+        <div
+          className="fixed inset-0 bg-black/90 flex items-center justify-center z-[60] p-4"
+          onClick={() => setActiveImage(null)}
+        >
+          <div className="relative max-w-6xl max-h-[90vh] w-full h-full flex flex-col">
+            <div className="flex justify-between items-center mb-4">
+              <h4 className="text-lg font-semibold text-slate-100">
+                {activeImage.title}
+              </h4>
+              <button
+                onClick={() => setActiveImage(null)}
+                className="text-slate-400 hover:text-red-400 text-3xl transition-colors leading-none"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="flex-1 flex items-center justify-center">
+              {activeImage.videoUrl ? (
+                <div
+                  className="w-full h-full max-w-5xl max-h-[80vh] aspect-video"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <iframe
+                    src={getYouTubeEmbedUrl(activeImage.videoUrl)}
+                    title={activeImage.title}
+                    className="w-full h-full rounded border border-slate-800"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </div>
+              ) : (
+                <img
+                  src={activeImage.src}
+                  alt={activeImage.title}
+                  className="max-w-full max-h-full object-contain rounded border border-slate-800"
+                  onClick={(e) => e.stopPropagation()}
+                />
+              )}
+            </div>
+          </div>
+        </div>
       )}
     </section>
   );

@@ -1,42 +1,59 @@
 const About = () => {
+  const coursework = [
+    "Deep Learning & Neural Networks",
+    "VLSI Design",
+    "AI-Powered Applications",
+    "Embedded Systems",
+    "Data Science",
+    "Algorithms & Data Structures",
+    "Computer Networks",
+    "Probability & Statistics",
+    "Linear Algebra",
+  ];
+
   const skills = [
+    {
+      title: "AI/ML",
+      skills: [
+        "PyTorch",
+        "TensorFlow",
+        "NumPy",
+        "Scikit-learn",
+        "OpenAI API",
+        "Meta-RL",
+        "GloVe",
+        "WandB",
+      ],
+    },
     {
       title: "Languages",
       skills: [
         "Python",
-        "TypeScript",
+        "C/C++",
+        "Rust",
+        "Assembly (x86)",
         "JavaScript",
-        "C++",
-        "Ruby",
-        "C",
-        "HTML/CSS",
-        "Java",
-        "Assembly",
+        "SQL",
       ],
     },
     {
-      title: "Frameworks & Tools",
+      title: "Hardware/Systems",
       skills: [
-        "React",
-        "Ruby on Rails",
-        "TailwindCSS",
-        "MySQL",
-        "Sinatra",
-        "Vite",
-        "Git",
-        "VS Code",
-        "Visual Studio 2022",
-        "PyCharm",
-      ],
-    },
-    {
-      title: "Engineering",
-      skills: [
+        "VLSI Design",
+        "Micro-controllers (Arduino)",
         "Quartus II",
         "Cadence",
-        "Keil uVision",
+        "Keil",
+      ],
+    },
+    {
+      title: "Tools",
+      skills: [
+        "Linux (Ubuntu)",
+        "Git/GitHub",
+        "Docker",
         "Power Apps",
-        "Android Studio",
+        "VS Code",
       ],
     },
   ];
@@ -62,6 +79,20 @@ const About = () => {
             <h3 className="text-base font-medium text-slate-100 mb-8">
               Education
             </h3>
+
+            <div className="mb-10 group">
+              <div className="flex justify-between items-baseline mb-2">
+                <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
+                  M.S. Electrical Engineering
+                </h4>
+                <span className="text-sm font-mono text-slate-500">
+                  In Progress
+                </span>
+              </div>
+              <p className="text-base text-slate-400 leading-relaxed">
+                UT Rio Grande Valley
+              </p>
+            </div>
 
             <div className="mb-10 group">
               <div className="flex justify-between items-baseline mb-2">
@@ -111,6 +142,20 @@ const About = () => {
                 Deep Learning
               </p>
             </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-base font-medium text-slate-100 mb-6">
+            Relevant Coursework
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {coursework.map((course, index) => (
+              <p key={index} className="flex items-center gap-3 text-sm text-slate-400">
+                <span className="w-1 h-1 rounded-full bg-blue-500 shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+                {course}
+              </p>
+            ))}
           </div>
         </div>
 

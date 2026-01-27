@@ -21,7 +21,7 @@ const Home = () => {
           <TypeAnimation
             preRenderFirstString={true}
             sequence={[
-              "Computer Scientist & Electical Engineer",
+              "Computer Scientist & Electrical Engineer",
               3000,
               "Full Stack Developer",
               2000,
