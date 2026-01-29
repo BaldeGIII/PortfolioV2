@@ -203,7 +203,7 @@ function App() {
 
       <footer className="max-w-6xl mx-auto px-6 md:px-12 lg:px-16 pt-12 pb-12 border-t border-slate-900 text-sm text-slate-600">
         <div className="flex justify-between items-center">
-          <p>© 2025 Baldemar Guajardo</p>
+          <p>© 2026 Baldemar Guajardo</p>
           <p className="flex items-center gap-1">
             Built with <span className="text-blue-500">BALVIS</span>
           </p>
