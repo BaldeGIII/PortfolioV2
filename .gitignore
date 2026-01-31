@@ -32,6 +32,3 @@ dist-ssr
 *.key
 *.cert
 secrets.*
-
-# Personal assets and images
-src/assets/
