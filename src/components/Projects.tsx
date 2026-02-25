@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { FaGithub } from "react-icons/fa";
 import Chipy8 from "../assets/Chip8-Emulator.png";
 import AquaMundi from "../assets/AquaMundi.png";
@@ -72,15 +73,27 @@ const projects = [
 
 const ProjectItem = ({
   project,
-  onImageClick
+  onImageClick,
+  index
 }: {
   project: (typeof projects)[0];
   onImageClick: (image: string, title: string, videoUrl?: string, isMobile?: boolean) => void;
-}) => (
-  <div className="group py-8 border-t border-slate-900 first:border-0 first:pt-0">
+  index: number;
+}) => {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(itemRef, { threshold: 0.2 });
+
+  return (
+  <div
+    ref={itemRef}
+    className={`group py-8 border-t border-slate-900 first:border-0 first:pt-0 transition-all duration-500 ${
+      isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+    }`}
+    style={{ transitionDelay: `${index * 100}ms` }}
+  >
     <div className="grid md:grid-cols-[200px,1fr] gap-6 mb-4">
       <div
-        className="relative overflow-hidden rounded border border-slate-800 group-hover:border-blue-500 transition-colors cursor-pointer bg-slate-900/50 flex items-center justify-center aspect-video"
+        className="relative overflow-hidden rounded border border-slate-800 group-hover:border-blue-500 group-hover:shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all duration-300 cursor-pointer bg-slate-900/50 flex items-center justify-center aspect-video transform group-hover:scale-105"
         onClick={() => onImageClick(project.image, project.title, project.videoUrl, project.isMobile)}
       >
         <img
@@ -138,15 +151,31 @@ const ProjectItem = ({
       </div>
     </div>
   </div>
-);
+  );
+};
 
 const Projects = () => {
   const [activeImage, setActiveImage] = useState<{ src: string; title: string; videoUrl?: string; isMobile?: boolean } | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
   const completedProjects = projects.filter((p) => p.completion === 100);
   const inProgressProjects = projects.filter((p) => p.completion < 100);
 
   const handleImageClick = (image: string, title: string, videoUrl?: string, isMobile?: boolean) => {
     setActiveImage({ src: image, title, videoUrl, isMobile });
+    setImageLoading(true);
+    setIsClosing(false);
+  };
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setActiveImage(null);
+      setIsClosing(false);
+      setImageLoading(true);
+    }, 200);
   };
 
   // Convert YouTube URL to embed format
@@ -156,13 +185,21 @@ const Projects = () => {
   };
 
   return (
-    <section id="projects" className="py-24 md:py-32 -mt-16 pt-32">
-      <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
+      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+      }`}>
         Selected Projects
       </h2>
 
       {completedProjects.map((project, index) => (
-        <ProjectItem key={index} project={project} onImageClick={handleImageClick} />
+        <ProjectItem key={index} project={project} onImageClick={handleImageClick} index={index} />
       ))}
 
       {inProgressProjects.length > 0 && (
@@ -171,24 +208,30 @@ const Projects = () => {
             In Progress
           </h3>
           {inProgressProjects.map((project, index) => (
-            <ProjectItem key={index} project={project} onImageClick={handleImageClick} />
+            <ProjectItem key={index} project={project} onImageClick={handleImageClick} index={index + completedProjects.length} />
           ))}
         </>
       )}
 
       {activeImage && (
         <div
-          className="fixed inset-0 bg-black/90 flex items-center justify-center z-[60] p-4"
-          onClick={() => setActiveImage(null)}
+          className={`fixed inset-0 bg-black/90 flex items-center justify-center z-[60] p-4 ${
+            isClosing ? 'animate-fade-out' : 'animate-fade-in'
+          }`}
+          onClick={closeModal}
         >
-          <div className={`relative ${activeImage.isMobile ? "max-w-md" : "max-w-6xl"} max-h-[90vh] w-full h-full flex flex-col`}>
+          <div
+            className={`relative ${activeImage.isMobile ? "max-w-md" : "max-w-6xl"} max-h-[90vh] w-full h-full flex flex-col ${
+              isClosing ? 'animate-modal-exit' : 'animate-modal-enter'
+            }`}
+          >
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-lg font-semibold text-slate-100">
                 {activeImage.title}
               </h4>
               <button
-                onClick={() => setActiveImage(null)}
-                className="text-slate-400 hover:text-red-400 text-3xl transition-colors leading-none"
+                onClick={closeModal}
+                className="text-slate-400 hover:text-red-400 text-3xl transition-all duration-200 leading-none hover:scale-110"
               >
                 &times;
               </button>
@@ -205,17 +248,31 @@ const Projects = () => {
                     className="w-full h-full rounded border border-slate-800"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
+                    onLoad={() => setImageLoading(false)}
                   />
+                  {imageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50">
+                      <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full"></div>
+                    </div>
+                  )}
                 </div>
               ) : (
-                <img
-                  src={activeImage.src}
-                  alt={activeImage.title}
-                  className={`max-w-full max-h-full object-contain rounded border border-slate-800 ${
-                    activeImage.isMobile ? "w-full" : ""
-                  }`}
-                  onClick={(e) => e.stopPropagation()}
-                />
+                <>
+                  {imageLoading && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-slate-900/50">
+                      <div className="animate-spin w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full"></div>
+                    </div>
+                  )}
+                  <img
+                    src={activeImage.src}
+                    alt={activeImage.title}
+                    className={`max-w-full max-h-full object-contain rounded border border-slate-800 transition-opacity duration-300 ${
+                      imageLoading ? 'opacity-0' : 'opacity-100'
+                    } ${activeImage.isMobile ? "w-full" : ""}`}
+                    onClick={(e) => e.stopPropagation()}
+                    onLoad={() => setImageLoading(false)}
+                  />
+                </>
               )}
             </div>
           </div>

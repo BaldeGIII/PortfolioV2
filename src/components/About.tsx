@@ -1,4 +1,9 @@
+import { useRef } from 'react';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+
 const About = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
   const coursework = [
     "Deep Learning & Neural Networks",
     "VLSI Design",
@@ -59,8 +64,16 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-24 md:py-32 -mt-16 pt-32">
-      <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4">
+    <section
+      id="about"
+      ref={sectionRef}
+      className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
+      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+      }`}>
         About
       </h2>
 
@@ -85,7 +98,7 @@ const About = () => {
             </h3>
 
             <div className="space-y-6">
-              <div className="group">
+              <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
                     Master of Science in Electrical Engineering
@@ -99,7 +112,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="group">
+              <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
                     Bachelor of Science in Computer Science
@@ -116,7 +129,7 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="group">
+              <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
                   <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
                     Associate of Science in Engineering
@@ -180,11 +193,14 @@ const About = () => {
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
             {skills.map((category) => (
-              <div key={category.title} className="bg-slate-900/30 border border-slate-800 rounded-lg p-4">
-                <h4 className="text-sm font-medium text-blue-400 mb-3">
+              <div
+                key={category.title}
+                className="bg-slate-900/30 border border-slate-800 rounded-lg p-4 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
+              >
+                <h4 className="text-sm font-medium text-blue-400 mb-3 group-hover:text-blue-300 transition-colors">
                   {category.title}
                 </h4>
-                <p className="text-sm text-slate-400 leading-relaxed">
+                <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
                   {category.skills.join(" • ")}
                 </p>
               </div>

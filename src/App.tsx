@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useScrollSpy } from "./hooks/useScrollSpy";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Home from "./components/Home";
@@ -7,6 +8,7 @@ import Experience from "./components/Experience";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const activeSection = useScrollSpy(['home', 'about', 'experience', 'projects', 'contact'], { offset: 150 });
 
   // Effect to close menu on any page scroll
   useEffect(() => {
@@ -91,7 +93,7 @@ function App() {
       <header className="fixed top-4 left-4 md:top-10 md:left-12 z-50">
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="menu-button text-base md:text-lg font-bold text-slate-100 hover:text-blue-400 transition-colors focus:outline-none"
+          className="menu-button text-base md:text-lg font-bold text-slate-100 hover:text-blue-400 hover:scale-110 transition-all duration-200 focus:outline-none hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"
         >
           BG<span className="text-blue-500">III</span>
         </button>
@@ -109,31 +111,51 @@ function App() {
         <div className="py-2 flex flex-col min-w-[140px]">
           <a
             href="#home"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'home'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Home
           </a>
           <a
             href="#about"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'about'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             About
           </a>
           <a
             href="#experience"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'experience'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Experience
           </a>
           <a
             href="#projects"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'projects'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'contact'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Contact
           </a>
@@ -152,31 +174,51 @@ function App() {
         <div className="py-2 flex flex-col min-w-[140px]">
           <a
             href="#home"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'home'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Home
           </a>
           <a
             href="#about"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'about'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             About
           </a>
           <a
             href="#experience"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'experience'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Experience
           </a>
           <a
             href="#projects"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'projects'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Projects
           </a>
           <a
             href="#contact"
-            className="block px-6 py-3 text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 transition-colors text-sm font-medium"
+            className={`block px-6 py-3 text-sm font-medium transition-all duration-200 border-l-2 ${
+              activeSection === 'contact'
+                ? 'text-blue-400 bg-slate-800/50 border-blue-500'
+                : 'text-slate-300 hover:text-blue-400 hover:bg-slate-800/50 hover:translate-x-1 border-transparent'
+            }`}
           >
             Contact
           </a>

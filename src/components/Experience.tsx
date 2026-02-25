@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 // Import your logos - adjust paths as necessary
 import mvecLogo from "../assets/MVECLogo.png";
 import utrgvLogo from "../assets/UTRGVLogo.png";
@@ -84,9 +85,22 @@ const experiencesData: ExperienceItem[] = [
 
 const Experience = () => {
   const [activeDocument, setActiveDocument] = useState<string | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 
-  const ExperienceItem = ({ exp }: { exp: ExperienceItem }) => (
-    <div className="group mb-12 md:grid md:grid-cols-4 md:gap-6">
+  const ExperienceItem = ({ exp, index }: { exp: ExperienceItem; index: number }) => {
+    const itemRef = useRef<HTMLDivElement>(null);
+    const isVisible = useIntersectionObserver(itemRef, { threshold: 0.2 });
+
+    return (
+    <div
+      ref={itemRef}
+      className={`group mb-12 md:grid md:grid-cols-4 md:gap-6 transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
       <header className="md:col-span-1 mb-2 md:mb-0">
         <span className="text-xs font-mono text-slate-500 mt-1.5 uppercase tracking-wide group-hover:text-blue-400 transition-colors">
           {exp.duration}
@@ -117,34 +131,68 @@ const Experience = () => {
                   : exp.documentUrl ?? null
               )
             }
-            className="mt-4 text-sm text-blue-400 hover:text-blue-300 transition-colors underline decoration-dotted"
+            className="mt-4 text-sm text-blue-400 hover:text-blue-300 hover:scale-105 transition-all duration-200 underline decoration-dotted inline-flex items-center gap-1"
           >
             {activeDocument === exp.documentUrl ? "Hide" : "View"} Details
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </button>
         )}
       </div>
     </div>
-  );
+    );
+  };
 
   return (
-    <section id="experience" className="py-24 md:py-32 -mt-16 pt-32">
-      <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4">
+    <section
+      id="experience"
+      ref={sectionRef}
+      className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+      }`}
+    >
+      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
+        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+      }`}>
         Experience
       </h2>
-      {experiencesData.map((exp) => (
-        <ExperienceItem key={exp.id} exp={exp} />
+      {experiencesData.map((exp, index) => (
+        <ExperienceItem key={exp.id} exp={exp} index={index} />
       ))}
 
       {activeDocument && (
-        <div className="fixed inset-0 bg-black/75 flex items-center justify-center z-[60] p-4">
-          <div className="bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-800">
+        <div
+          className={`fixed inset-0 bg-black/75 flex items-center justify-center z-[60] p-4 ${
+            isClosing ? 'animate-fade-out' : 'animate-fade-in'
+          }`}
+          onClick={() => {
+            setIsClosing(true);
+            setTimeout(() => {
+              setActiveDocument(null);
+              setIsClosing(false);
+            }, 200);
+          }}
+        >
+          <div
+            className={`bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-800 ${
+              isClosing ? 'animate-modal-exit' : 'animate-modal-enter'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex justify-between items-center mb-2">
               <h4 className="text-lg font-semibold text-slate-100">
                 Document Viewer
               </h4>
               <button
-                onClick={() => setActiveDocument(null)}
-                className="text-slate-400 hover:text-red-400 text-2xl transition-colors"
+                onClick={() => {
+                  setIsClosing(true);
+                  setTimeout(() => {
+                    setActiveDocument(null);
+                    setIsClosing(false);
+                  }, 200);
+                }}
+                className="text-slate-400 hover:text-red-400 text-2xl transition-colors hover:scale-110 duration-200"
               >
                 &times;
               </button>
