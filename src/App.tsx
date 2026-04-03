@@ -3,7 +3,6 @@ import { useScrollSpy } from "./hooks/useScrollSpy";
 import { Github, Linkedin, Mail, Menu, X, FileText } from "lucide-react";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Home from "./components/Home";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 

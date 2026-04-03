@@ -86,7 +86,7 @@ const experiencesData: ExperienceItem[] = [
 const Experience = () => {
   const [activeDocument, setActiveDocument] = useState<string | null>(null);
   const [isClosing, setIsClosing] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
 
   const ExperienceItem = ({ exp, index }: { exp: ExperienceItem; index: number }) => {
