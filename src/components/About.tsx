@@ -1,8 +1,9 @@
 import { useRef } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import profilePic from '../assets/67811850.png';
 
 const About = () => {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
   const coursework = [
     "Deep Learning & Neural Networks",
@@ -64,30 +65,30 @@ const About = () => {
   ];
 
   return (
-    <section
-      id="about"
+    <div
       ref={sectionRef}
-      className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
+      className={`transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
-        isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
-      }`}>
-        About
-      </h2>
-
       <div className="space-y-12">
-        <div className="max-w-3xl">
-          <p className="text-slate-300 leading-relaxed text-base mb-4">
-            Hello, I'm{" "}
-            <span className="text-slate-100 font-medium">Baldemar Guajardo</span>,
-            a Computer Science graduate student and software developer based in
-            Penitas, Texas.
-          </p>
-          <p className="text-slate-400 leading-relaxed text-base">
-            With expertise spanning full-stack development, machine learning, deep learning, and embedded systems, I thrive on transforming complex challenges into innovative, scalable solutions.
-          </p>
+        <div className="flex flex-col md:flex-row gap-8 items-start">
+          <img
+            src={profilePic}
+            alt="Baldemar Guajardo"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-slate-800 hover:border-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300 shrink-0"
+          />
+          <div className="max-w-3xl">
+            <p className="text-slate-300 leading-relaxed text-base mb-4">
+              Hello, I'm{" "}
+              <span className="text-slate-100 font-medium">Baldemar Guajardo</span>,
+              a Computer Science graduate student and software developer based in
+              Penitas, Texas.
+            </p>
+            <p className="text-slate-400 leading-relaxed text-base">
+              With expertise spanning full-stack development, machine learning, deep learning, and embedded systems, I thrive on transforming complex challenges into innovative, scalable solutions.
+            </p>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
@@ -208,7 +209,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -145,10 +145,9 @@ const Experience = () => {
   };
 
   return (
-    <section
-      id="experience"
+    <div
       ref={sectionRef}
-      className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
+      className={`transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
@@ -205,7 +204,7 @@ const Experience = () => {
           </div>
         </div>
       )}
-    </section>
+    </div>
   );
 };
 
