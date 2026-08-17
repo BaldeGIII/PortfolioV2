@@ -4,8 +4,9 @@ import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import mvecLogo from "../assets/MVECLogo.png";
 import utrgvLogo from "../assets/UTRGVLogo.png";
 import vsrLogo from "../assets/vsrLogo.jpeg";
-import team10Poster from "../assets/Team 10 Poster.pdf";
-import trackFieldProject from "../assets/Group1_Track_and_Field_Data_Project.pdf";
+
+const team10Poster = "/documents/Team-10-Poster.pdf";
+const trackFieldProject = "/documents/Track-and-Field-Data-Project.pdf";
 
 interface ExperienceItem {
   id: string;
@@ -20,6 +21,21 @@ interface ExperienceItem {
 }
 
 const experiencesData: ExperienceItem[] = [
+  {
+    id: "mvec-2026",
+    image: mvecLogo,
+    title: "IT Operations Intern",
+    company: "Magic Valley Electric Cooperative",
+    duration: "June 2026 – August 2026",
+    location: "Mercedes, TX",
+    programName: "IT Operations Division",
+    responsibilities: [
+      "Engineered a secure, offline-capable desktop application to replace a legacy, unencrypted Microsoft Access database, integrating SQLCipher encryption and automating a manual update process that previously took over 4 hours, ensuring the tool remains functional during storm outages when internet access is unavailable.",
+      "Built a cross-platform automation tool that normalizes and reconciles hardware inventory data across siloed systems (Rapid7, SentinelOne, Active Directory, ManageEngine), replacing hours of manual spreadsheet cross-referencing with a single automated report covering 300+ assets and flagging stale or unaccounted-for equipment.",
+      "Co-developed NEXUS, a unified command dashboard integrating 5 separate cybersecurity and IT platforms into one real-time view via API integration and system orchestration, giving the IT department instant oversight of assets, inventory, and vulnerabilities in a single pane of glass.",
+      "Completed a two-month capstone on-schedule and presented technical outcomes and live demos to IT Operations leadership and mentors.",
+    ],
+  },
   {
     id: "vsr",
     image: vsrLogo,
@@ -107,15 +123,15 @@ const Experience = () => {
         </span>
       </header>
       <div className="md:col-span-3">
-        <h3 className="text-lg font-medium text-slate-100 group-hover:text-blue-400 transition-colors">
-          {exp.title} <span className="text-slate-600">·</span> {exp.company}
+        <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-400 transition-colors">
+          {exp.title} <span className="text-slate-500 dark:text-slate-600">·</span> {exp.company}
         </h3>
         <p className="text-sm text-slate-500 mt-1">📍 {exp.location}</p>
         <ul className="mt-4 space-y-2">
           {exp.responsibilities.map((responsibility, i) => (
             <li
               key={i}
-              className="text-slate-400 text-base leading-relaxed flex items-start"
+              className="text-slate-600 dark:text-slate-400 text-base leading-relaxed flex items-start"
             >
               <span className="mr-3 mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
               <span>{responsibility}</span>
@@ -151,7 +167,7 @@ const Experience = () => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
+      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
         Experience
@@ -174,13 +190,13 @@ const Experience = () => {
           }}
         >
           <div
-            className={`bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-800 ${
+            className={`bg-white dark:bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 ${
               isClosing ? 'animate-modal-exit' : 'animate-modal-enter'
             }`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-2">
-              <h4 className="text-lg font-semibold text-slate-100">
+              <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
                 Document Viewer
               </h4>
               <button
@@ -191,7 +207,7 @@ const Experience = () => {
                     setIsClosing(false);
                   }, 200);
                 }}
-                className="text-slate-400 hover:text-red-400 text-2xl transition-colors hover:scale-110 duration-200"
+                className="text-slate-500 dark:text-slate-400 hover:text-red-400 text-2xl transition-colors hover:scale-110 duration-200"
               >
                 &times;
               </button>

@@ -3,7 +3,7 @@ import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const schema = z.object({
@@ -16,7 +16,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-const Contact = () => {
+const Contact = ({ theme }: { theme: 'light' | 'dark' }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
@@ -86,10 +86,9 @@ const Contact = () => {
   return (
     <section
       ref={sectionRef}
-      className={`py-32 md:py-40 bg-slate-950 -mt-16 pt-32 transition-all duration-700 ${
+      className={`py-32 md:py-40 bg-white dark:bg-slate-950 -mt-16 pt-32 transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
-      id="contact"
     >
       <div className="max-w-2xl mx-auto">
         <h2 className={`text-base font-mono text-slate-500 uppercase tracking-widest mb-12 text-center transition-all duration-500 ${
@@ -122,20 +121,22 @@ const Contact = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm text-slate-400 mb-2"
+                className="block text-sm text-slate-600 dark:text-slate-400 mb-2"
               >
                 Name
               </label>
               <input
                 {...register("name")}
                 id="name"
-                className={`w-full bg-slate-900 border text-slate-300 px-4 py-2
+                aria-invalid={errors.name ? "true" : "false"}
+                aria-describedby={errors.name ? "name-error" : undefined}
+                className={`w-full bg-slate-50 dark:bg-slate-900 border text-slate-900 dark:text-slate-300 px-4 py-2
                           focus:outline-none focus:border-blue-500 transition-colors ${
-                            errors.name ? 'border-red-500 animate-shake' : 'border-slate-800'
+                            errors.name ? 'border-red-500 animate-shake' : 'border-slate-300 dark:border-slate-800'
                           }`}
               />
               {errors.name && (
-                <p className="mt-1 text-xs text-red-400 animate-slide-down">
+                <p id="name-error" className="mt-1 text-xs text-red-400 animate-slide-down">
                   {errors.name.message}
                 </p>
               )}
@@ -144,7 +145,7 @@ const Contact = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm text-slate-400 mb-2"
+                className="block text-sm text-slate-600 dark:text-slate-400 mb-2"
               >
                 Email
               </label>
@@ -152,13 +153,15 @@ const Contact = () => {
                 {...register("email")}
                 id="email"
                 type="email"
-                className={`w-full bg-slate-900 border text-slate-300 px-4 py-2
+                aria-invalid={errors.email ? "true" : "false"}
+                aria-describedby={errors.email ? "email-error" : undefined}
+                className={`w-full bg-slate-50 dark:bg-slate-900 border text-slate-900 dark:text-slate-300 px-4 py-2
                           focus:outline-none focus:border-blue-500 transition-colors ${
-                            errors.email ? 'border-red-500 animate-shake' : 'border-slate-800'
+                            errors.email ? 'border-red-500 animate-shake' : 'border-slate-300 dark:border-slate-800'
                           }`}
               />
               {errors.email && (
-                <p className="mt-1 text-xs text-red-400 animate-slide-down">
+                <p id="email-error" className="mt-1 text-xs text-red-400 animate-slide-down">
                   {errors.email.message}
                 </p>
               )}
@@ -167,7 +170,7 @@ const Contact = () => {
             <div>
               <label
                 htmlFor="message"
-                className="block text-sm text-slate-400 mb-2"
+                className="block text-sm text-slate-600 dark:text-slate-400 mb-2"
               >
                 Message
               </label>
@@ -175,13 +178,15 @@ const Contact = () => {
                 {...register("message")}
                 id="message"
                 rows={5}
-                className={`w-full bg-slate-900 border text-slate-300 px-4 py-2
+                aria-invalid={errors.message ? "true" : "false"}
+                aria-describedby={errors.message ? "message-error" : undefined}
+                className={`w-full bg-slate-50 dark:bg-slate-900 border text-slate-900 dark:text-slate-300 px-4 py-2
                           focus:outline-none focus:border-blue-500 transition-colors resize-none ${
-                            errors.message ? 'border-red-500 animate-shake' : 'border-slate-800'
+                            errors.message ? 'border-red-500 animate-shake' : 'border-slate-300 dark:border-slate-800'
                           }`}
               />
               {errors.message && (
-                <p className="mt-1 text-xs text-red-400 animate-slide-down">
+                <p id="message-error" className="mt-1 text-xs text-red-400 animate-slide-down">
                   {errors.message.message}
                 </p>
               )}
@@ -190,10 +195,11 @@ const Contact = () => {
             <div className="flex justify-center my-6">
               <div className="transform scale-100">
                 <ReCAPTCHA
+                  key={theme}
                   ref={recaptchaRef}
                   sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY!}
                   onChange={handleCaptchaChange}
-                  theme="dark"
+                  theme={theme}
                 />
               </div>
             </div>
@@ -201,9 +207,9 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting || !captchaToken}
-              className="w-full py-3 bg-slate-900 border border-slate-700 text-slate-300
+              className="w-full py-3 bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300
                         hover:border-blue-500 hover:text-blue-400 hover:scale-[1.02] disabled:opacity-50
-                        disabled:hover:border-slate-700 disabled:hover:text-slate-300 disabled:hover:scale-100
+                        disabled:hover:border-slate-300 dark:disabled:hover:border-slate-700 disabled:hover:text-slate-700 dark:disabled:hover:text-slate-300 disabled:hover:scale-100
                         transition-all duration-200 text-base flex items-center justify-center gap-2"
             >
               {isSubmitting && (

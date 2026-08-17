@@ -2,10 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/67811850.png" />
+    <link rel="icon" type="image/png" href="/67811850.png" />
+    <link rel="apple-touch-icon" href="/67811850.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Baldemar Guajardo - Full Stack Developer & AI Engineer. Computer Science student specializing in Machine Learning, Deep Learning, and Web Development." />
     <title>Baldemar Guajardo Portfolio</title>
+    <script>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        var isDark = stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (isDark) document.documentElement.classList.add('dark');
+      })();
+    </script>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://baldegiii.vercel.app/" />
+    <meta property="og:title" content="Baldemar Guajardo Portfolio" />
+    <meta property="og:description" content="Baldemar Guajardo - Full Stack Developer & AI Engineer. Computer Science student specializing in Machine Learning, Deep Learning, and Web Development." />
+    <meta property="og:image" content="https://baldegiii.vercel.app/67811850.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Baldemar Guajardo Portfolio" />
+    <meta name="twitter:description" content="Baldemar Guajardo - Full Stack Developer & AI Engineer. Computer Science student specializing in Machine Learning, Deep Learning, and Web Development." />
+    <meta name="twitter:image" content="https://baldegiii.vercel.app/67811850.png" />
   </head>
   <body>
     <div id="root"></div>

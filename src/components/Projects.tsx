@@ -2,12 +2,12 @@ import { useState, useRef } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import { FaGithub } from "react-icons/fa";
 import { FiExternalLink, FiChevronDown, FiPlay } from "react-icons/fi";
-import Chipy8 from "../assets/Chip8-Emulator.png";
-import AquaMundi from "../assets/AquaMundi.png";
-import The70 from "../assets/70GBEmu.png";
-import Balvis from "../assets/balvis.png";
-import ValleySteelApp from "../assets/ValleySteelApp.png";
-import SparkSensei from "../assets/SparkSensei.png";
+import Chipy8 from "../assets/Chip8-Emulator.webp";
+import AquaMundi from "../assets/AquaMundi.webp";
+import The70 from "../assets/70GBEmu.webp";
+import Balvis from "../assets/balvis.webp";
+import ValleySteelApp from "../assets/ValleySteelApp.webp";
+import SparkSensei from "../assets/SparkSensei.webp";
 
 const projects = [
   {
@@ -106,7 +106,7 @@ const ProjectItem = ({
   return (
     <div
       ref={itemRef}
-      className={`group border-t border-slate-800 first:border-0 transition-all duration-500 ${
+      className={`group border-t border-slate-200 dark:border-slate-800 first:border-0 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
@@ -114,14 +114,14 @@ const ProjectItem = ({
       {/* Clickable Header */}
       <button
         onClick={onToggle}
-        className="w-full py-6 flex items-start md:items-center justify-between gap-4 text-left hover:bg-slate-900/30 transition-colors px-2 -mx-2 rounded-lg"
+        className="w-full py-6 flex items-start md:items-center justify-between gap-4 text-left hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-colors px-2 -mx-2 rounded-lg"
       >
         <div className="flex-1">
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
-            <h3 className="text-lg md:text-xl font-medium text-slate-100 group-hover:text-blue-400 transition-colors flex items-center gap-2">
+            <h3 className="text-lg md:text-xl font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-400 transition-colors flex items-center gap-2">
               {project.title}
               {project.completion < 100 && (
-                <span className="text-xs text-slate-500 font-normal bg-slate-800 px-2 py-0.5 rounded">
+                <span className="text-xs text-slate-500 font-normal bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded">
                   {project.completion}%
                 </span>
               )}
@@ -146,10 +146,10 @@ const ProjectItem = ({
             {project.description.split('.')[0]}.
           </p>
         </div>
-        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-slate-700 transition-all duration-300 ${
-          isExpanded ? 'bg-blue-500 border-blue-500 rotate-180' : 'bg-slate-900 group-hover:border-blue-500'
+        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-slate-300 dark:border-slate-700 transition-all duration-300 ${
+          isExpanded ? 'bg-blue-500 border-blue-500 rotate-180' : 'bg-slate-100 dark:bg-slate-900 group-hover:border-blue-500'
         }`}>
-          <FiChevronDown className={`w-4 h-4 ${isExpanded ? 'text-white' : 'text-slate-400'}`} />
+          <FiChevronDown className={`w-4 h-4 ${isExpanded ? 'text-white' : 'text-slate-600 dark:text-slate-400'}`} />
         </div>
       </button>
 
@@ -159,7 +159,7 @@ const ProjectItem = ({
       }`}>
         <div className="grid md:grid-cols-2 gap-6 pt-2">
           {/* Image/Video */}
-          <div className="relative rounded-lg overflow-hidden border border-slate-700 bg-slate-900/50">
+          <div className="relative rounded-lg overflow-hidden border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50">
             {project.videoUrl ? (
               <div className="aspect-video">
                 <iframe
@@ -175,6 +175,7 @@ const ProjectItem = ({
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="max-w-full max-h-full object-contain rounded"
                 />
               </div>
@@ -190,7 +191,7 @@ const ProjectItem = ({
           {/* Details */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="text-slate-300 text-sm leading-relaxed mb-4">
+              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
@@ -233,13 +234,12 @@ const Projects = () => {
 
   return (
     <section
-      id="projects"
       ref={sectionRef}
       className={`py-24 md:py-32 -mt-16 pt-32 transition-all duration-700 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-800 pb-4 transition-all duration-500 ${
+      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
         Selected Projects
@@ -259,7 +259,7 @@ const Projects = () => {
 
       {inProgressProjects.length > 0 && (
         <>
-          <h3 className="text-base font-mono text-slate-500 uppercase tracking-widest mt-16 mb-6 border-b border-slate-800 pb-4">
+          <h3 className="text-base font-mono text-slate-500 uppercase tracking-widest mt-16 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
             In Progress
           </h3>
           <div className="space-y-0">

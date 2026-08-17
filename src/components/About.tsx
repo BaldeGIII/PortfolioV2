@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
-import profilePic from '../assets/67811850.png';
+import profilePic from '../assets/67811850.webp';
 
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -76,16 +76,16 @@ const About = () => {
           <img
             src={profilePic}
             alt="Baldemar Guajardo"
-            className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-slate-800 hover:border-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300 shrink-0"
+            className="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-2 border-slate-200 dark:border-slate-800 hover:border-blue-500 hover:shadow-[0_0_30px_rgba(59,130,246,0.5)] hover:scale-105 transition-all duration-300 shrink-0"
           />
           <div className="max-w-3xl">
-            <p className="text-slate-300 leading-relaxed text-base mb-4">
+            <p className="text-slate-700 dark:text-slate-300 leading-relaxed text-base mb-4">
               Hello, I'm{" "}
-              <span className="text-slate-100 font-medium">Baldemar Guajardo</span>,
+              <span className="text-slate-900 dark:text-slate-100 font-medium">Baldemar Guajardo</span>,
               a Computer Science graduate student and software developer based in
               Penitas, Texas.
             </p>
-            <p className="text-slate-400 leading-relaxed text-base">
+            <p className="text-slate-600 dark:text-slate-400 leading-relaxed text-base">
               With expertise spanning full-stack development, machine learning, deep learning, and embedded systems, I thrive on transforming complex challenges into innovative, scalable solutions.
             </p>
           </div>
@@ -93,7 +93,7 @@ const About = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <h3 className="text-lg font-medium text-slate-100 mb-6 flex items-center gap-2">
+            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
               <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
               Education
             </h3>
@@ -101,28 +101,28 @@ const About = () => {
             <div className="space-y-6">
               <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
+                  <h4 className="text-base font-medium text-slate-800 dark:text-slate-200 group-hover:text-blue-400 transition-colors">
                     Master of Science in Electrical Engineering
                   </h4>
                   <span className="text-xs font-mono text-slate-500 whitespace-nowrap ml-4">
                     Expected May 2027
                   </span>
                 </div>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   The University of Texas Rio Grande Valley
                 </p>
               </div>
 
               <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
+                  <h4 className="text-base font-medium text-slate-800 dark:text-slate-200 group-hover:text-blue-400 transition-colors">
                     Bachelor of Science in Computer Science
                   </h4>
                   <span className="text-xs font-mono text-slate-500 whitespace-nowrap ml-4">
                     Fall 2025
                   </span>
                 </div>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   The University of Texas Rio Grande Valley
                 </p>
                 <p className="text-xs text-slate-500 mt-1">
@@ -132,14 +132,14 @@ const About = () => {
 
               <div className="group hover:-translate-y-1 transition-all duration-200">
                 <div className="flex justify-between items-start mb-2">
-                  <h4 className="text-base font-medium text-slate-200 group-hover:text-blue-400 transition-colors">
+                  <h4 className="text-base font-medium text-slate-800 dark:text-slate-200 group-hover:text-blue-400 transition-colors">
                     Associate of Science in Engineering
                   </h4>
                   <span className="text-xs font-mono text-slate-500 whitespace-nowrap ml-4">
                     Spring 2023
                   </span>
                 </div>
-                <p className="text-sm text-slate-400">
+                <p className="text-sm text-slate-600 dark:text-slate-400">
                   South Texas College
                 </p>
               </div>
@@ -147,11 +147,11 @@ const About = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-medium text-slate-100 mb-6 flex items-center gap-2">
+            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
               <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
               Focus Areas
             </h3>
-            <div className="space-y-3 text-sm text-slate-400">
+            <div className="space-y-3 text-sm text-slate-600 dark:text-slate-400">
               <p className="flex items-center gap-3">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                 Artificial Intelligence & Machine Learning
@@ -173,13 +173,13 @@ const About = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-medium text-slate-100 mb-6 flex items-center gap-2">
+          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
             <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
             Relevant Coursework
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
             {coursework.map((course, index) => (
-              <p key={index} className="flex items-center gap-2 text-sm text-slate-400">
+              <p key={index} className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></span>
                 {course}
               </p>
@@ -188,7 +188,7 @@ const About = () => {
         </div>
 
         <div>
-          <h3 className="text-lg font-medium text-slate-100 mb-6 flex items-center gap-2">
+          <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-6 flex items-center gap-2">
             <span className="w-1 h-6 bg-blue-500 rounded-full"></span>
             Technical Skills
           </h3>
@@ -196,12 +196,12 @@ const About = () => {
             {skills.map((category) => (
               <div
                 key={category.title}
-                className="bg-slate-900/30 border border-slate-800 rounded-lg p-4 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-slate-50 dark:bg-slate-900/30 border border-slate-200 dark:border-slate-800 rounded-lg p-4 hover:border-blue-500/50 hover:shadow-[0_0_15px_rgba(59,130,246,0.2)] hover:scale-105 hover:-translate-y-1 transition-all duration-300 group"
               >
                 <h4 className="text-sm font-medium text-blue-400 mb-3 group-hover:text-blue-300 transition-colors">
                   {category.title}
                 </h4>
-                <p className="text-sm text-slate-400 leading-relaxed group-hover:text-slate-300 transition-colors">
+                <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed group-hover:text-slate-800 dark:group-hover:text-slate-300 transition-colors">
                   {category.skills.join(" • ")}
                 </p>
               </div>
