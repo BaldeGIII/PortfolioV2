@@ -12,6 +12,7 @@ import SparkSensei from "../assets/SparkSensei.webp";
 const projects = [
   {
     title: "Spark Sensei",
+    category: "Mobile Development",
     description:
       "Developed a cross-platform mobile/web app using React Native and Expo with AI-powered tutoring via the Anthropic Claude API. Implemented tiered subscription system (Free/Premium/Pro) backed by Supabase Postgres with Row-Level Security. Built Supabase Edge Functions (Deno) for server-side AI inference, usage tracking, and per-tier rate limiting. Features native PDF analysis, image upload, multi-conversation cloud sync, and markdown rendering with code highlighting.",
     technologies: ["React Native", "Expo", "Supabase", "Claude API", "Deno"],
@@ -23,6 +24,7 @@ const projects = [
   },
   {
     title: "Multi-Agent Autonomous Racing (Senior Project)",
+    category: "Machine Learning",
     description:
       "Engineered a competitive multi-agent racing environment using MetaDrive, utilizing Proximal Policy Optimization (PPO) to train agents from scratch for optimal trajectory and speed. Integrated Weights & Biases (WandB) to monitor training sessions and designed a custom reward function with 'Ghost Mode' for stable parallel training.",
     technologies: ["Python", "MetaDrive", "PPO", "WandB"],
@@ -34,6 +36,7 @@ const projects = [
   },
   {
     title: "Valley Steel Recycling - Vehicle Inspection App",
+    category: "Mobile Development",
     description:
       "Developed a full-stack mobile application for Valley Steel Recycling to streamline vehicle inspection workflows. Features include bilingual support (EN/ES), admin dashboard with real-time analytics, user management system, comprehensive defect tracking with signature capture, and detailed inspection history.",
     technologies: ["React Native", "Expo Go", "JavaScript", "Render", "Neon DB"],
@@ -44,6 +47,7 @@ const projects = [
   },
   {
     title: "Chip-8 Emulator",
+    category: "Systems Programming",
     description:
       "Built a high-fidelity Chip-8 emulator featuring accurate opcode execution and cycle timing. Integrated a Tkinter UI for seamless ROM loading and program navigation.",
     technologies: ["Python", "Assembly", "Binary", "Tkinter", "Pygame"],
@@ -54,6 +58,7 @@ const projects = [
   },
   {
     title: "Aqua-Mundi",
+    category: "Full-Stack Development",
     description:
       "Developed a full-stack app for the NASA Space Apps Challenge to map endangered species in Texas. Increased local biodiversity awareness through interactive visualizations.",
     technologies: ["Python", "JavaScript", "Android Studio"],
@@ -64,22 +69,24 @@ const projects = [
   },
   {
     title: "BaldeBoy Emulator",
+    category: "Systems Programming",
     description:
       "In-progress Game Boy Emulator built with React, TypeScript, and Vite for a modern, high-performance web experience. Focuses on efficient frame execution, ROM loading, and audio processing.",
     technologies: ["React", "TypeScript", "Vite", "TailwindCSS"],
     link: "https://github.com/BaldeGIII/BaldeBoyEmulator",
     image: The70,
-    completion: 70,
+    completion: 95,
     isMobile: false,
   },
   {
     title: "BALVIS",
+    category: "AI / Web Development",
     description:
       "Architected an AI-powered productivity assistant leveraging OpenAI's API for advanced conversational capabilities. Engineered features for on-demand content summarization and educational video search.",
     technologies: ["React", "TypeScript", "Vite", "TailwindCSS", "OpenAI API"],
     link: "https://github.com/BaldeGIII/BALVIS",
     image: Balvis,
-    completion: 75,
+    completion: 80,
     isMobile: false,
   },
 ];
@@ -117,7 +124,10 @@ const ProjectItem = ({
         className="w-full py-6 flex items-start md:items-center justify-between gap-4 text-left hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-colors px-2 -mx-2 rounded-lg"
       >
         <div className="flex-1">
-          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2">
+          <span className="text-xs font-mono text-slate-500 dark:text-slate-500 uppercase tracking-wide">
+            {project.category}
+          </span>
+          <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2 mt-1">
             <h3 className="text-lg md:text-xl font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-400 transition-colors flex items-center gap-2">
               {project.title}
               {project.completion < 100 && (
@@ -239,17 +249,22 @@ const Projects = () => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
+      <div className={`mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
-        Selected Projects
-      </h2>
+        <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest">
+          Selected Projects
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          A mix of full-stack apps, AI tools, and low-level systems projects built end-to-end.
+        </p>
+      </div>
 
       <div className="space-y-0">
         {completedProjects.map((project, index) => (
-          <ProjectItem 
-            key={index} 
-            project={project} 
+          <ProjectItem
+            key={index}
+            project={project}
             index={index}
             isExpanded={expandedIndex === index}
             onToggle={() => handleToggle(index)}
@@ -266,9 +281,9 @@ const Projects = () => {
             {inProgressProjects.map((project, index) => {
               const globalIndex = completedProjects.length + index;
               return (
-                <ProjectItem 
-                  key={index} 
-                  project={project} 
+                <ProjectItem
+                  key={index}
+                  project={project}
                   index={globalIndex}
                   isExpanded={expandedIndex === globalIndex}
                   onToggle={() => handleToggle(globalIndex)}

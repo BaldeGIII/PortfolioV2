@@ -1,16 +1,11 @@
 import { useState, useRef } from "react";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
-// Import your logos - adjust paths as necessary
-import mvecLogo from "../assets/MVECLogo.png";
-import utrgvLogo from "../assets/UTRGVLogo.png";
-import vsrLogo from "../assets/vsrLogo.jpeg";
 
 const team10Poster = "/documents/Team-10-Poster.pdf";
 const trackFieldProject = "/documents/Track-and-Field-Data-Project.pdf";
 
 interface ExperienceItem {
   id: string;
-  image: string; // Path to the company/organization logo
   title: string;
   company: string;
   duration: string;
@@ -23,7 +18,6 @@ interface ExperienceItem {
 const experiencesData: ExperienceItem[] = [
   {
     id: "mvec-2026",
-    image: mvecLogo,
     title: "IT Operations Intern",
     company: "Magic Valley Electric Cooperative",
     duration: "June 2026 – August 2026",
@@ -38,7 +32,6 @@ const experiencesData: ExperienceItem[] = [
   },
   {
     id: "vsr",
-    image: vsrLogo,
     title: "Full Stack Developer Intern",
     company: "Valley Steel Recycling",
     duration: "July 2025 – September 2025",
@@ -51,7 +44,6 @@ const experiencesData: ExperienceItem[] = [
   },
   {
     id: "utrgv",
-    image: utrgvLogo,
     title: "Deep Learning Researcher",
     company: "The University of Texas Rio Grande Valley",
     duration: "January 2025 – May 2025",
@@ -66,7 +58,6 @@ const experiencesData: ExperienceItem[] = [
   },
   {
     id: "utrgv-2",
-    image: utrgvLogo,
     title: "Data Science Research Assistant",
     company: "The University of Texas Rio Grande Valley",
     duration: "January 2025 – May 2025",
@@ -81,7 +72,6 @@ const experiencesData: ExperienceItem[] = [
   },
   {
     id: "mvec",
-    image: mvecLogo, // Use imported logo
     title: "IT Summer Programmer Intern",
     company: "Magic Valley Electric Cooperative",
     duration: "May 2024 - August 2024",
@@ -99,17 +89,21 @@ const experiencesData: ExperienceItem[] = [
   // Add more experience items here if needed, following the same structure
 ];
 
-const Experience = () => {
-  const [activeDocument, setActiveDocument] = useState<string | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
+const ExperienceEntry = ({
+  exp,
+  index,
+  activeDocument,
+  onToggleDocument,
+}: {
+  exp: ExperienceItem;
+  index: number;
+  activeDocument: string | null;
+  onToggleDocument: (url: string) => void;
+}) => {
+  const itemRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(itemRef, { threshold: 0.2 });
 
-  const ExperienceItem = ({ exp, index }: { exp: ExperienceItem; index: number }) => {
-    const itemRef = useRef<HTMLDivElement>(null);
-    const isVisible = useIntersectionObserver(itemRef, { threshold: 0.2 });
-
-    return (
+  return (
     <div
       ref={itemRef}
       className={`group mb-12 md:grid md:grid-cols-4 md:gap-6 transition-all duration-500 ${
@@ -140,13 +134,7 @@ const Experience = () => {
         </ul>
         {exp.documentUrl && (
           <button
-            onClick={() =>
-              setActiveDocument(
-                activeDocument === exp.documentUrl
-                  ? null
-                  : exp.documentUrl ?? null
-              )
-            }
+            onClick={() => onToggleDocument(exp.documentUrl!)}
             className="mt-4 text-sm text-blue-400 hover:text-blue-300 hover:scale-105 transition-all duration-200 underline decoration-dotted inline-flex items-center gap-1"
           >
             {activeDocument === exp.documentUrl ? "Hide" : "View"} Details
@@ -157,7 +145,17 @@ const Experience = () => {
         )}
       </div>
     </div>
-    );
+  );
+};
+
+const Experience = () => {
+  const [activeDocument, setActiveDocument] = useState<string | null>(null);
+  const [isClosing, setIsClosing] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { threshold: 0.1 });
+
+  const handleToggleDocument = (url: string) => {
+    setActiveDocument(activeDocument === url ? null : url);
   };
 
   return (
@@ -167,13 +165,24 @@ const Experience = () => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <h2 className={`text-base font-mono text-blue-500 uppercase tracking-widest mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
+      <div className={`mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
-        Experience
-      </h2>
+        <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest">
+          Experience
+        </h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+          Roles where I've shipped production software and driven measurable results.
+        </p>
+      </div>
       {experiencesData.map((exp, index) => (
-        <ExperienceItem key={exp.id} exp={exp} index={index} />
+        <ExperienceEntry
+          key={exp.id}
+          exp={exp}
+          index={index}
+          activeDocument={activeDocument}
+          onToggleDocument={handleToggleDocument}
+        />
       ))}
 
       {activeDocument && (

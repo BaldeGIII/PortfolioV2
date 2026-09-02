@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { X } from "lucide-react";
 
 const WIDTH = 360;
@@ -35,13 +35,25 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
   const gameStateRef = useRef<GameState>("ready");
   const pausedRef = useRef(false);
   const animationRef = useRef<number>(0);
+  const highScoreRef = useRef(0);
 
   useEffect(() => {
     const stored = Number(localStorage.getItem(HIGH_SCORE_KEY) || 0);
     setHighScore(stored);
+    highScoreRef.current = stored;
   }, []);
 
-  const resetGame = () => {
+  const endGame = useCallback(() => {
+    gameStateRef.current = "gameover";
+    setGameState("gameover");
+    if (scoreRef.current > highScoreRef.current) {
+      highScoreRef.current = scoreRef.current;
+      setHighScore(scoreRef.current);
+      localStorage.setItem(HIGH_SCORE_KEY, String(scoreRef.current));
+    }
+  }, []);
+
+  const resetGame = useCallback(() => {
     playerYRef.current = HEIGHT / 2;
     playerVYRef.current = 0;
     pillarsRef.current = [
@@ -52,25 +64,17 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
     setScore(0);
     gameStateRef.current = "playing";
     setGameState("playing");
-  };
+  }, []);
 
-  const flap = () => {
+  const flap = useCallback(() => {
     if (gameStateRef.current === "ready" || gameStateRef.current === "gameover") {
       resetGame();
       return;
     }
     playerVYRef.current = FLAP_VELOCITY;
-  };
+  }, [resetGame]);
 
-  const endGame = () => {
-    gameStateRef.current = "gameover";
-    setGameState("gameover");
-    if (scoreRef.current > highScore) {
-      setHighScore(scoreRef.current);
-      localStorage.setItem(HIGH_SCORE_KEY, String(scoreRef.current));
-    }
-  };
-
+  // Game loop
   useEffect(() => {
     if (!open) return;
 
@@ -209,8 +213,9 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
       cancelAnimationFrame(animationRef.current);
       document.removeEventListener("visibilitychange", handleVisibility);
     };
-  }, [open, theme, highScore]);
+  }, [open, theme, endGame]);
 
+  // Keyboard controls
   useEffect(() => {
     if (!open) return;
 
@@ -224,8 +229,9 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [open]);
+  }, [open, flap, onClose]);
 
+  // Lock body scroll while open
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
