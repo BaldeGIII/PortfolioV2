@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import { Github, Linkedin, Mail, FileText, ArrowDown } from 'lucide-react';
 import profilePic from '../assets/67811850.webp';
@@ -45,17 +46,13 @@ const Home = () => {
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-2">
-            <a
-              href="#about"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-              }}
+            <Link
+              to="/about"
               className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-medium bg-hermes-ink text-hermes-bg px-5 py-3 transition-opacity hover:opacity-80"
             >
               More about me
               <ArrowDown size={16} />
-            </a>
+            </Link>
             <a
               href="/BaldemarGuajardoResume.pdf"
               target="_blank"
