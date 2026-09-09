@@ -41,6 +41,14 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        hermes: {
+          blue: '#1a1aff',
+          cream: '#f2efe6',
+          bg: 'var(--bg)',
+          ink: 'var(--ink)',
+          panel: 'var(--panel)',
+          line: 'var(--line)',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -50,6 +58,7 @@ module.exports = {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
         mono: ['Fira Code', 'monospace'],
+        display: ['"Times New Roman"', 'Times', 'serif'],
       },
       animation: {
         // Modal animations

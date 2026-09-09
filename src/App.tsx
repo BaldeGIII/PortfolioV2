@@ -53,26 +53,26 @@ function App() {
   };
 
   return (
-    <div className="bg-white text-slate-700 dark:bg-slate-950 dark:text-slate-300 font-sans min-h-screen lg:flex">
+    <div className="bg-hermes-bg text-hermes-ink font-sans min-h-screen lg:flex transition-colors duration-300">
       <EasterEgg onTrigger={openGame} />
       <Game open={gameOpen} onClose={closeGame} theme={theme} />
       {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-hermes-bg/90 backdrop-blur-md border-b border-hermes-line">
         <div className="flex items-center justify-between px-6 py-4">
-          <a href="#" className="text-lg font-bold text-slate-900 dark:text-slate-100">
-            BG<span className="text-blue-500">III</span>
+          <a href="#" className="text-xl font-bold font-display text-hermes-ink">
+            BG<span className="opacity-60">III</span>
           </a>
           <div className="flex items-center gap-2">
             <button
               onClick={toggleTheme}
-              className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-400 transition-colors"
+              className="p-2 border border-hermes-line text-hermes-ink hover:opacity-60 transition-opacity"
               aria-label={theme === 'dark' ? "Switch to light mode" : "Switch to dark mode"}
             >
               {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-slate-500 dark:text-slate-400 hover:text-blue-400 transition-colors"
+              className="p-2 border border-hermes-line text-hermes-ink hover:opacity-60 transition-opacity"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileMenuOpen}
             >
@@ -83,7 +83,7 @@ function App() {
 
         {/* Mobile Menu Dropdown */}
         <nav
-          className={`absolute top-full left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-all duration-300 ${
+          className={`absolute top-full left-0 right-0 bg-hermes-bg/95 backdrop-blur-md border-b border-hermes-line transition-all duration-300 ${
             mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
           }`}
         >
@@ -93,34 +93,34 @@ function App() {
                 key={item.id}
                 href={`#${item.id}`}
                 onClick={(e) => handleNavClick(e, item.id)}
-                className={`block py-2 text-sm font-medium transition-colors ${
+                className={`block py-2 text-sm font-mono uppercase tracking-widest transition-colors ${
                   activeSection === item.id
-                    ? 'text-blue-400'
-                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                    ? 'text-hermes-ink font-bold'
+                    : 'text-hermes-ink/60 hover:text-hermes-ink'
                 }`}
               >
                 {item.label}
               </a>
             ))}
           </div>
-          <div className="px-6 py-4 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-3">
+          <div className="px-6 py-4 border-t border-hermes-line flex flex-col gap-3">
             <a
               href="/BaldemarGuajardoResume.pdf"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-900 bg-blue-400 hover:bg-blue-300 px-4 py-2 rounded-lg transition-colors w-fit"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-medium bg-hermes-ink text-hermes-bg px-4 py-2.5 transition-opacity hover:opacity-80 w-fit"
             >
               <FileText size={16} />
               Resume
             </a>
             <div className="flex gap-4">
-              <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors" aria-label="GitHub">
+              <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="text-hermes-ink/60 hover:text-hermes-ink transition-colors" aria-label="GitHub">
                 <Github size={20} />
               </a>
-              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="text-slate-500 hover:text-blue-400 transition-colors" aria-label="LinkedIn">
+              <a href={LINKEDIN_URL} target="_blank" rel="noreferrer" className="text-hermes-ink/60 hover:text-hermes-ink transition-colors" aria-label="LinkedIn">
                 <Linkedin size={20} />
               </a>
-              <a href={EMAIL_URL} className="text-slate-500 hover:text-blue-400 transition-colors" aria-label="Email">
+              <a href={EMAIL_URL} className="text-hermes-ink/60 hover:text-hermes-ink transition-colors" aria-label="Email">
                 <Mail size={20} />
               </a>
             </div>
@@ -132,12 +132,12 @@ function App() {
       <aside className="hidden lg:flex lg:flex-col lg:justify-between lg:fixed lg:left-0 lg:top-0 lg:bottom-0 lg:w-[320px] lg:px-12 lg:py-16 lg:overflow-y-auto">
         {/* Top: Wordmark + Theme Toggle */}
         <div className="flex items-center justify-between">
-          <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="text-xl font-bold text-slate-900 dark:text-slate-100">
-            BG<span className="text-blue-500">III</span>
+          <a href="#home" onClick={(e) => handleNavClick(e, 'home')} className="text-3xl font-bold font-display text-hermes-ink">
+            BG<span className="opacity-60">III</span>
           </a>
           <button
             onClick={toggleTheme}
-            className="shrink-0 p-2 rounded-full border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-blue-400 hover:border-blue-500/50 transition-colors"
+            className="shrink-0 p-2 border border-hermes-line text-hermes-ink hover:opacity-60 transition-opacity"
             aria-label={theme === 'dark' ? "Switch to light mode" : "Switch to dark mode"}
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -155,15 +155,15 @@ function App() {
             >
               <span className={`h-px transition-all duration-200 ${
                 activeSection === item.id
-                  ? 'w-12 bg-slate-900 dark:bg-slate-100'
-                  : 'w-6 bg-slate-300 dark:bg-slate-600 group-hover:w-12 group-hover:bg-slate-600 dark:group-hover:bg-slate-300'
+                  ? 'w-12 bg-hermes-ink'
+                  : 'w-6 bg-hermes-ink/30 group-hover:w-12 group-hover:bg-hermes-ink/70'
               }`} />
-              <span className={`text-xs font-bold uppercase tracking-widest transition-colors ${
+              <span className={`text-xs font-mono font-bold uppercase tracking-widest transition-colors ${
                 activeSection === item.id
-                  ? 'text-slate-900 dark:text-slate-100'
-                  : 'text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300'
+                  ? 'text-hermes-ink'
+                  : 'text-hermes-ink/50 group-hover:text-hermes-ink'
               }`}>
-                {item.label}
+                # {item.label}
               </span>
             </a>
           ))}
@@ -175,7 +175,7 @@ function App() {
             href="/BaldemarGuajardoResume.pdf"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 text-sm font-medium text-slate-900 bg-blue-400 hover:bg-blue-300 px-4 py-2.5 rounded-lg transition-colors w-fit"
+            className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-medium bg-hermes-ink text-hermes-bg px-4 py-2.5 transition-opacity hover:opacity-80 w-fit"
           >
             <FileText size={18} />
             Resume
@@ -185,7 +185,7 @@ function App() {
               href={GITHUB_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              className="text-hermes-ink/50 hover:text-hermes-ink transition-colors"
               aria-label="GitHub"
             >
               <Github size={22} />
@@ -194,14 +194,14 @@ function App() {
               href={LINKEDIN_URL}
               target="_blank"
               rel="noreferrer"
-              className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              className="text-hermes-ink/50 hover:text-hermes-ink transition-colors"
               aria-label="LinkedIn"
             >
               <Linkedin size={22} />
             </a>
             <a
               href={EMAIL_URL}
-              className="text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 transition-colors"
+              className="text-hermes-ink/50 hover:text-hermes-ink transition-colors"
               aria-label="Email"
             >
               <Mail size={22} />
@@ -229,11 +229,11 @@ function App() {
         </section>
 
         {/* Footer */}
-        <footer className="pt-12 pb-8 border-t border-slate-200 dark:border-slate-800 text-sm text-slate-500 dark:text-slate-600">
+        <footer className="pt-12 pb-8 border-t border-hermes-line text-xs font-mono uppercase tracking-widest text-hermes-ink/50">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p>© 2026 Baldemar Guajardo</p>
-            <p className="flex items-center gap-1">
-              Built with React + <span className="text-blue-500">TailwindCSS</span>
+            <p>
+              Built with React + TailwindCSS
             </p>
           </div>
         </footer>

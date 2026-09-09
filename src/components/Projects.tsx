@@ -8,6 +8,7 @@ import The70 from "../assets/70GBEmu.webp";
 import Balvis from "../assets/balvis.webp";
 import ValleySteelApp from "../assets/ValleySteelApp.webp";
 import SparkSensei from "../assets/SparkSensei.webp";
+import artworkSword from "../assets/artwork-sword.jpg";
 
 const projects = [
   {
@@ -113,7 +114,7 @@ const ProjectItem = ({
   return (
     <div
       ref={itemRef}
-      className={`group border-t border-slate-200 dark:border-slate-800 first:border-0 transition-all duration-500 ${
+      className={`group border-t border-hermes-line first:border-0 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
       }`}
       style={{ transitionDelay: `${index * 100}ms` }}
@@ -121,17 +122,17 @@ const ProjectItem = ({
       {/* Clickable Header */}
       <button
         onClick={onToggle}
-        className="w-full py-6 flex items-start md:items-center justify-between gap-4 text-left hover:bg-slate-50 dark:hover:bg-slate-900/30 transition-colors px-2 -mx-2 rounded-lg"
+        className="w-full py-6 flex items-start md:items-center justify-between gap-4 text-left hover:bg-hermes-panel transition-colors px-2 -mx-2"
       >
         <div className="flex-1">
-          <span className="text-xs font-mono text-slate-500 dark:text-slate-500 uppercase tracking-wide">
+          <span className="text-xs font-mono text-hermes-ink/50 uppercase tracking-wide">
             {project.category}
           </span>
           <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4 mb-2 mt-1">
-            <h3 className="text-lg md:text-xl font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-400 transition-colors flex items-center gap-2">
+            <h3 className="text-xl font-medium font-display text-hermes-ink group-hover:opacity-70 transition-opacity flex items-center gap-2">
               {project.title}
               {project.completion < 100 && (
-                <span className="text-xs text-slate-500 font-normal bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded">
+                <span className="text-xs font-mono text-hermes-ink/60 border border-hermes-line px-2 py-0.5">
                   {project.completion}%
                 </span>
               )}
@@ -140,26 +141,26 @@ const ProjectItem = ({
               {project.technologies.slice(0, 4).map((tech, i) => (
                 <span
                   key={`${tech}-${i}`}
-                  className="text-xs font-mono text-blue-500/80 bg-blue-500/10 px-2 py-0.5 rounded"
+                  className="text-xs font-mono text-hermes-ink/70 border border-hermes-line px-2 py-0.5"
                 >
                   {tech}
                 </span>
               ))}
               {project.technologies.length > 4 && (
-                <span className="text-xs font-mono text-slate-500">
+                <span className="text-xs font-mono text-hermes-ink/50">
                   +{project.technologies.length - 4}
                 </span>
               )}
             </div>
           </div>
-          <p className="text-slate-500 text-sm line-clamp-1 md:line-clamp-none md:max-w-2xl">
+          <p className="text-hermes-ink/60 text-sm line-clamp-1 md:line-clamp-none md:max-w-2xl">
             {project.description.split('.')[0]}.
           </p>
         </div>
-        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full border border-slate-300 dark:border-slate-700 transition-all duration-300 ${
-          isExpanded ? 'bg-blue-500 border-blue-500 rotate-180' : 'bg-slate-100 dark:bg-slate-900 group-hover:border-blue-500'
+        <div className={`flex-shrink-0 w-8 h-8 flex items-center justify-center border border-hermes-line transition-all duration-300 ${
+          isExpanded ? 'bg-hermes-ink border-hermes-ink rotate-180' : 'bg-transparent group-hover:border-hermes-ink'
         }`}>
-          <FiChevronDown className={`w-4 h-4 ${isExpanded ? 'text-white' : 'text-slate-600 dark:text-slate-400'}`} />
+          <FiChevronDown className={`w-4 h-4 ${isExpanded ? 'text-hermes-bg' : 'text-hermes-ink'}`} />
         </div>
       </button>
 
@@ -167,9 +168,16 @@ const ProjectItem = ({
       <div className={`overflow-hidden transition-all duration-500 ease-in-out ${
         isExpanded ? 'max-h-[800px] opacity-100 pb-8' : 'max-h-0 opacity-0'
       }`}>
-        <div className="grid md:grid-cols-2 gap-6 pt-2">
+        <div className="relative">
+          <div
+            className="duotone !absolute inset-0 opacity-25 pointer-events-none"
+            aria-hidden="true"
+          >
+            <img src={artworkSword} alt="" loading="lazy" style={{ objectPosition: 'center 65%' }} />
+          </div>
+          <div className="relative grid md:grid-cols-2 gap-6 pt-2">
           {/* Image/Video */}
-          <div className="relative rounded-lg overflow-hidden border border-slate-300 dark:border-slate-700 bg-slate-100 dark:bg-slate-900/50">
+          <div className="relative overflow-hidden border border-hermes-line bg-hermes-panel">
             {project.videoUrl ? (
               <div className="aspect-video">
                 <iframe
@@ -181,17 +189,16 @@ const ProjectItem = ({
                 />
               </div>
             ) : (
-              <div className="aspect-video flex items-center justify-center p-4">
+              <div className="aspect-video duotone">
                 <img
                   src={project.image}
                   alt={project.title}
                   loading="lazy"
-                  className="max-w-full max-h-full object-contain rounded"
                 />
               </div>
             )}
             {project.videoUrl && (
-              <div className="absolute top-3 left-3 flex items-center gap-1.5 text-xs text-white bg-black/60 backdrop-blur-sm px-2 py-1 rounded">
+              <div className="absolute top-3 left-3 flex items-center gap-1.5 text-xs font-mono uppercase tracking-wide text-hermes-bg bg-hermes-ink px-2 py-1">
                 <FiPlay className="w-3 h-3" />
                 Video Demo
               </div>
@@ -201,14 +208,14 @@ const ProjectItem = ({
           {/* Details */}
           <div className="flex flex-col justify-between">
             <div>
-              <p className="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">
+              <p className="text-hermes-ink/70 text-sm leading-relaxed mb-4">
                 {project.description}
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {project.technologies.map((tech, i) => (
                   <span
                     key={`${tech}-${i}`}
-                    className="text-xs font-mono text-blue-400 bg-blue-500/10 border border-blue-500/20 px-2.5 py-1 rounded-full"
+                    className="text-xs font-mono text-hermes-ink/70 border border-hermes-line px-2.5 py-1"
                   >
                     {tech}
                   </span>
@@ -219,12 +226,13 @@ const ProjectItem = ({
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-medium text-slate-900 bg-blue-400 hover:bg-blue-300 px-4 py-2.5 rounded-lg transition-colors w-fit"
+              className="inline-flex items-center gap-2 text-xs font-mono uppercase tracking-widest font-medium bg-hermes-ink text-hermes-bg px-4 py-2.5 transition-opacity hover:opacity-80 w-fit"
             >
               {project.isWebsite ? <FiExternalLink className="w-4 h-4" /> : <FaGithub className="w-4 h-4" />}
               {project.isWebsite ? "Visit Website" : "View on GitHub"}
             </a>
           </div>
+        </div>
         </div>
       </div>
     </div>
@@ -249,13 +257,13 @@ const Projects = () => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <div className={`mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
+      <div className={`mb-8 md:mb-12 border-b border-hermes-line pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
-        <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest">
-          Selected Projects
-        </h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+        <p className="text-xs font-mono uppercase tracking-widest text-hermes-ink/60">
+          #3 Selected Projects
+        </p>
+        <p className="text-sm font-mono text-hermes-ink/60 mt-2">
           A mix of full-stack apps, AI tools, and low-level systems projects built end-to-end.
         </p>
       </div>
@@ -274,7 +282,7 @@ const Projects = () => {
 
       {inProgressProjects.length > 0 && (
         <>
-          <h3 className="text-base font-mono text-slate-500 uppercase tracking-widest mt-16 mb-6 border-b border-slate-200 dark:border-slate-800 pb-4">
+          <h3 className="text-xs font-mono uppercase tracking-widest text-hermes-ink/60 mt-16 mb-6 border-b border-hermes-line pb-4">
             In Progress
           </h3>
           <div className="space-y-0">

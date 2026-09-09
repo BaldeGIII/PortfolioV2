@@ -91,10 +91,10 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
     ctx.scale(dpr, dpr);
 
     const isDark = theme === "dark";
-    const bgColor = isDark ? "#020617" : "#f8fafc";
-    const traceColor = isDark ? "rgba(148, 163, 184, 0.08)" : "rgba(100, 116, 139, 0.12)";
-    const pillarColor = "#3b82f6";
-    const playerColor = "#fbbf24";
+    const bgColor = isDark ? "#060620" : "#f2efe6";
+    const traceColor = isDark ? "rgba(242, 239, 230, 0.12)" : "rgba(20, 20, 204, 0.12)";
+    const pillarColor = isDark ? "#f2efe6" : "#1414cc";
+    const playerColor = isDark ? "#f2efe6" : "#1414cc";
 
     const draw = () => {
       ctx.fillStyle = bgColor;
@@ -143,11 +143,11 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
       ctx.beginPath();
       ctx.arc(0, 0, PLAYER_RADIUS, 0, Math.PI * 2);
       ctx.fillStyle = playerColor;
-      ctx.shadowColor = "rgba(251, 191, 36, 0.6)";
+      ctx.shadowColor = isDark ? "rgba(242, 239, 230, 0.6)" : "rgba(20, 20, 204, 0.4)";
       ctx.shadowBlur = 12;
       ctx.fill();
       ctx.shadowBlur = 0;
-      ctx.fillStyle = isDark ? "#1e293b" : "#78350f";
+      ctx.fillStyle = isDark ? "#060620" : "#f2efe6";
       ctx.font = "bold 9px monospace";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -253,23 +253,23 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
       onClick={onClose}
     >
       <div
-        className="relative bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl p-4 animate-modal-enter"
+        className="relative bg-hermes-bg border border-hermes-line p-4 animate-modal-enter"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-3">
-          <h3 className="text-sm font-mono uppercase tracking-widest text-blue-500">
+          <h3 className="text-xs font-mono uppercase tracking-widest text-hermes-ink/70">
             III Runner
           </h3>
           <button
             onClick={onClose}
-            className="text-slate-500 hover:text-red-400 transition-colors"
+            className="text-hermes-ink/60 hover:text-hermes-ink transition-colors"
             aria-label="Close game"
           >
             <X size={20} />
           </button>
         </div>
 
-        <div className="relative rounded-lg overflow-hidden" style={{ width: WIDTH, height: HEIGHT }}>
+        <div className="relative overflow-hidden border border-hermes-line" style={{ width: WIDTH, height: HEIGHT }}>
           <canvas
             ref={canvasRef}
             onPointerDown={flap}
@@ -277,36 +277,36 @@ const Game = ({ open, onClose, theme }: { open: boolean; onClose: () => void; th
           />
 
           <div className="absolute top-3 left-0 right-0 flex justify-center pointer-events-none">
-            <span className="text-3xl font-bold text-slate-900 dark:text-white drop-shadow">
+            <span className="text-3xl font-bold font-display text-hermes-ink">
               {score}
             </span>
           </div>
 
           {gameState === "ready" && (
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/30 text-center px-6"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-hermes-bg/70 text-center px-6"
               onClick={flap}
             >
-              <p className="text-white font-semibold text-lg">Fly through the III gates</p>
-              <p className="text-slate-200 text-sm">Tap, click, or press Space to flap</p>
-              <p className="text-slate-300 text-xs mt-4">High Score: {highScore}</p>
+              <p className="text-hermes-ink font-display text-xl">Fly through the III gates</p>
+              <p className="text-hermes-ink/70 text-sm">Tap, click, or press Space to flap</p>
+              <p className="text-hermes-ink/50 text-xs font-mono mt-4">High Score: {highScore}</p>
             </div>
           )}
 
           {gameState === "gameover" && (
             <div
-              className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-black/50 text-center px-6"
+              className="absolute inset-0 flex flex-col items-center justify-center gap-2 bg-hermes-bg/80 text-center px-6"
               onClick={flap}
             >
-              <p className="text-white font-bold text-xl">Game Over</p>
-              <p className="text-slate-200 text-sm">Score: {score}</p>
-              <p className="text-slate-300 text-xs">High Score: {highScore}</p>
+              <p className="text-hermes-ink font-display font-bold text-2xl">Game Over</p>
+              <p className="text-hermes-ink/70 text-sm">Score: {score}</p>
+              <p className="text-hermes-ink/50 text-xs font-mono">High Score: {highScore}</p>
               <button
                 onClick={(e) => {
                   e.stopPropagation();
                   resetGame();
                 }}
-                className="mt-3 text-sm font-medium text-slate-900 bg-blue-400 hover:bg-blue-300 px-4 py-2 rounded-lg transition-colors"
+                className="mt-3 text-xs font-mono uppercase tracking-widest font-medium text-hermes-bg bg-hermes-ink px-4 py-2.5 transition-opacity hover:opacity-80"
               >
                 Play Again
               </button>

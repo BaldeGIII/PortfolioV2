@@ -112,22 +112,22 @@ const ExperienceEntry = ({
       style={{ transitionDelay: `${index * 150}ms` }}
     >
       <header className="md:col-span-1 mb-2 md:mb-0">
-        <span className="text-xs font-mono text-slate-500 mt-1.5 uppercase tracking-wide group-hover:text-blue-400 transition-colors">
+        <span className="text-xs font-mono text-hermes-ink/50 mt-1.5 uppercase tracking-wide group-hover:text-hermes-ink transition-colors">
           {exp.duration}
         </span>
       </header>
       <div className="md:col-span-3">
-        <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 group-hover:text-blue-400 transition-colors">
-          {exp.title} <span className="text-slate-500 dark:text-slate-600">·</span> {exp.company}
+        <h3 className="text-xl font-medium font-display text-hermes-ink group-hover:opacity-70 transition-opacity">
+          {exp.title} <span className="text-hermes-ink/40">·</span> {exp.company}
         </h3>
-        <p className="text-sm text-slate-500 mt-1">📍 {exp.location}</p>
+        <p className="text-xs font-mono uppercase tracking-wide text-hermes-ink/50 mt-1">{exp.location}</p>
         <ul className="mt-4 space-y-2">
           {exp.responsibilities.map((responsibility, i) => (
             <li
               key={i}
-              className="text-slate-600 dark:text-slate-400 text-base leading-relaxed flex items-start"
+              className="text-hermes-ink/70 text-base leading-relaxed flex items-start"
             >
-              <span className="mr-3 mt-1.5 w-1 h-1 rounded-full bg-blue-500 shrink-0 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></span>
+              <span className="mr-3 mt-2 w-1.5 h-1.5 bg-hermes-ink shrink-0"></span>
               <span>{responsibility}</span>
             </li>
           ))}
@@ -135,7 +135,7 @@ const ExperienceEntry = ({
         {exp.documentUrl && (
           <button
             onClick={() => onToggleDocument(exp.documentUrl!)}
-            className="mt-4 text-sm text-blue-400 hover:text-blue-300 hover:scale-105 transition-all duration-200 underline decoration-dotted inline-flex items-center gap-1"
+            className="mt-4 text-xs font-mono uppercase tracking-widest text-hermes-ink underline decoration-dotted hover:opacity-60 transition-opacity inline-flex items-center gap-1"
           >
             {activeDocument === exp.documentUrl ? "Hide" : "View"} Details
             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -165,13 +165,13 @@ const Experience = () => {
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
       }`}
     >
-      <div className={`mb-8 md:mb-12 border-b border-slate-200 dark:border-slate-800 pb-4 transition-all duration-500 ${
+      <div className={`mb-8 md:mb-12 border-b border-hermes-line pb-4 transition-all duration-500 ${
         isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
       }`}>
-        <h2 className="text-base font-mono text-blue-500 uppercase tracking-widest">
-          Experience
-        </h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mt-2">
+        <p className="text-xs font-mono uppercase tracking-widest text-hermes-ink/60">
+          #2 Experience
+        </p>
+        <p className="text-sm font-mono text-hermes-ink/60 mt-2">
           Roles where I've shipped production software and driven measurable results.
         </p>
       </div>
@@ -199,13 +199,13 @@ const Experience = () => {
           }}
         >
           <div
-            className={`bg-white dark:bg-slate-900 p-4 rounded-lg shadow-xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800 ${
+            className={`bg-hermes-bg p-4 w-full max-w-4xl h-full max-h-[90vh] flex flex-col border border-hermes-line ${
               isClosing ? 'animate-modal-exit' : 'animate-modal-enter'
             }`}
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-2">
-              <h4 className="text-lg font-semibold text-slate-900 dark:text-slate-100">
+              <h4 className="text-lg font-mono uppercase tracking-widest font-medium text-hermes-ink">
                 Document Viewer
               </h4>
               <button
@@ -216,7 +216,7 @@ const Experience = () => {
                     setIsClosing(false);
                   }, 200);
                 }}
-                className="text-slate-500 dark:text-slate-400 hover:text-red-400 text-2xl transition-colors hover:scale-110 duration-200"
+                className="text-hermes-ink/60 hover:opacity-60 text-2xl transition-opacity"
               >
                 &times;
               </button>
